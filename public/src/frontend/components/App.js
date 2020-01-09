@@ -1,19 +1,17 @@
 import React from 'react'
 import '../../styles/styles.css'
-import Search from './search.js';
-
-const searchBar = {
-  marginTop: '100px',
-  marginBottom: '100px'
-};
+import Search from './Search.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
-    return (
-      <div style={{ textAlign:"center" }}>
-         <Search style={{searchBar}} placeholder='Who are you going with?'/>
-         <Search style={{searchBar}} placeholder='What are you feeling?' />
-      </div>  
-    );
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div>Next</div> <FontAwesomeIcon icon={faChevronRight} />
+      <Search placeholder='Who are you going with?' />
+      <Search placeholder='What are you feeling?' />
+    </div>
+  )
 }
 
 export default App
