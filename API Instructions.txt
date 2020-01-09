@@ -1,0 +1,43 @@
+API Instructions
+
+Getting 3 Customers:
+http://api.reimaginebanking.com/customers?key=YOUR-GITHUB-API-KEY
+
+Each Customer:
+{
+    "_id": "5e175d69322fa016762f37ed",
+    "first_name": "Myrtis",
+    "last_name": "Ebert",
+    "address": {
+      "street_number": "418",
+      "street_name": "Nelson Lane",
+      "city": "Champlain",
+      "state": "Virginia",
+      "zip": "22438"
+}
+
+Getting All Accounts for a Customer:
+http://api.reimaginebanking.com/customers/CUSTOMER-_ID/accounts?key=YOUR-GITHUB-API-KEY
+
+Each Account:
+{
+    "_id": "5e175d6c322fa016762f37f0",
+    "type": "Checking",
+    "nickname": "Melisa's Account",
+    "rewards": 32177,
+    "balance": 6138,
+    "customer_id": "5e175d6a322fa016762f37ee"
+}
+
+
+Getting All Bills for a Account:
+http://api.reimaginebanking.com/accounts/CUSTOMER-ACCOUNT-_ID/bills?key=YOUR-GITHUB-API-KEY
+
+Getting All Purchases for a Account:
+http://api.reimaginebanking.com/accounts/CUSTOMER-ACCOUNT-_ID/purchases?key=YOUR-GITHUB-API-KEY
+
+
+
+
+
+
