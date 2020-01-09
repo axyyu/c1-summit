@@ -15,14 +15,31 @@ class Search extends React.Component {
   }
 
   render() {
+    const searchBar = {
+      marginTop: '50px',
+      marginBottom: '30px'
+    }
+
+    const input = {
+      borderRadius: '20px',
+      width: '60%',
+      padding: '10px',
+      outline: 'none',
+      borderWidth: '3px',
+      borderColor: '#C9C9C9'
+    }
+
     return (
-      <form style={searchBar}>
-        <input
-          type='text'
-          name='search'
-          placeholder={this.props.placeholder}
-        ></input>
-      </form>
+      <div style={searchBar}>
+        <form>
+          <input
+            style={input}
+            type='text'
+            name='search'
+            placeholder={this.props.placeholder}
+          ></input>
+        </form>
+      </div>
     )
   }
 }
