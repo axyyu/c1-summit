@@ -68,7 +68,7 @@ class FirebaseClient():
     points = random.randint(1000, 8000)
     return self.add_user(self.faker.first_name(), self.faker.last_name(), card, points)
 
-  def add_user(self,first, last, card, points):
+  def add_user(self, first, last, card, points):
     user = {
       "first":first, 
       "last":last,
