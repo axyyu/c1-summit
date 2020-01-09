@@ -3,7 +3,7 @@ import React from 'react'
 const suggestionStyle = {
   border: '1px solid #CAD3C8',
   padding: '10px',
-  width: '80%',
+  width: '100%',
   color: '#2C3A47'
 }
 

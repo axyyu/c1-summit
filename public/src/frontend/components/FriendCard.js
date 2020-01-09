@@ -2,17 +2,23 @@ import React from 'react'
 
 const friendCardStyle = {
   padding: '10px',
-  border: '1px solid black',
+  border: '1px solid #CAD3C8',
+  boxSizing: 'border-box',
   width: '20%',
   float: 'left',
-  margin: '0 2.5%',
+  marginRight: '5%',
   textAlign: 'center'
 }
 
-const FriendCard = ({ name }) => (
+const FriendCard = ({ name, members, setMembers }) => (
   <div style={friendCardStyle}>
     <p>{name}</p>
-    <button>Add to Group</button>
+    <button
+      style={{ backgroundColor: '#58B19F', marginBottom: '15px' }}
+      onClick={() => setMembers([...members, name])}
+    >
+      Add to Group
+    </button>
   </div>
 )
 
