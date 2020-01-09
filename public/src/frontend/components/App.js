@@ -9,11 +9,11 @@ function App() {
     <Router>
       <Switch>
         <Route path='/test'>hello this is a test!</Route>
-        <Route path='/'>
-          <SearchPage />
-        </Route>
         <Route path='/results'>
           <MapPage />
+        </Route>
+        <Route path='/'>
+          <SearchPage />
         </Route>
       </Switch>
     </Router>
