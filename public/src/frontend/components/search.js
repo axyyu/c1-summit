@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.js'
+import Suggestion from './Suggestion'
 
 const searchBar = {
   marginTop: '50px',
@@ -7,40 +8,49 @@ const searchBar = {
   width: '500px'
 }
 
-class Search extends React.Component {
-  state = {}
-
-  change = e => {
-    this.setState({ [e.target.name]: e.target.value })
+const Search = ({ placeholder, resultsList, members, setMembers }) => {
+  const searchBar = {
+    marginTop: '10px',
+    marginBottom: '30px'
   }
 
-  render() {
-    const searchBar = {
-      marginTop: '50px',
-      marginBottom: '30px'
-    }
-
-    const input = {
-      width: '80%',
-      padding: '10px',
-      outline: 'none',
-      border: '1px solid #CAD3C8',
-      fontSize: '1em'
-    }
-
-    return (
-      <div style={searchBar}>
-        <form>
-          <input
-            style={input}
-            type='text'
-            name='search'
-            placeholder={this.props.placeholder}
-          ></input>
-        </form>
-      </div>
-    )
+  const input = {
+    width: '100%',
+    padding: '10px',
+    outline: 'none',
+    border: '1px solid #CAD3C8',
+    fontSize: '1em'
   }
+
+  const [active, setActive] = useState(false)
+
+  return (
+    <div style={searchBar}>
+      <form>
+        <input
+          style={input}
+          type='text'
+          name='search'
+          autocomplete='off'
+          placeholder={placeholder}
+          onFocus={() => setActive(true)}
+          onBlur={() => setActive(false)}
+        ></input>
+        {active && (
+          <div>
+            {resultsList.map(item => {
+              return (
+                <Suggestion
+                  name={item}
+                  onClick={() => setMembers([...members, item])}
+                />
+              )
+            })}
+          </div>
+        )}
+      </form>
+    </div>
+  )
 }
 
 export default Search
