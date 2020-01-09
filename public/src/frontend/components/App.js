@@ -1,20 +1,23 @@
 import React from 'react'
 import '../../styles/styles.css'
-import Search from './search.js'
-import Suggestion from './Suggestion.js'
-
-const searchBar = {
-  marginTop: '100px',
-  marginBottom: '100px'
-};
+import SearchPage from '../SearchPage'
+import MapPage from '../MapPage'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 function App() {
-    return (
-      <div style={{ textAlign:"center" }}>
-         <Search style={{searchBar}} placeholder='Who are you going with?'/>
-         <Search style={{searchBar}} placeholder='What are you feeling?' />
-      </div>  
-    );
+  return (
+    <Router>
+      <Switch>
+        <Route path='/test'>hello this is a test!</Route>
+        <Route path='/'>
+          <SearchPage />
+        </Route>
+        <Route path='/results'>
+          <MapPage />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
 export default App
