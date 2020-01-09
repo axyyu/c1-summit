@@ -10,7 +10,7 @@ const searchBar = {
 
 const Search = ({ placeholder, resultsList, members, setMembers }) => {
   const searchBar = {
-    marginTop: '50px',
+    marginTop: '10px',
     marginBottom: '30px'
   }
 
