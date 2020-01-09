@@ -3,7 +3,7 @@ import "./App.js";
 
 export default class Search extends React.Component {
     state = {
-        
+
     }
     
 
@@ -11,10 +11,11 @@ export default class Search extends React.Component {
 		this.setState({[e.target.name]: e.target.value});
     };
     
+
     render() {
         return (
             <form>
-                <input type="text" name="search" placeholder={this.state.placeholder}></input>
+                <input type="text" name="search" placeholder={this.props.placeholder}></input>
             </form>
         );
     }
