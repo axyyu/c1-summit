@@ -20,7 +20,7 @@ class Search extends React.Component {
         padding: '10px',
         outline: 'none',
         borderWidth: '3px',
-        borderColor: '#C9C9C9'
+        borderColor: '#C9C9C9',
     }  
 
     return (

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../styles/styles.css'
-import Search from './search.js';
+import Search from './search.js'
+import Suggestion from './Suggestion.js'
 
 const searchBar = {
   marginTop: '100px',
