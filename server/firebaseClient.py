@@ -3,6 +3,14 @@ from firebase_admin import credentials, firestore
 import firebase_admin
 import random
 
+credit_cards = [
+  "Quicksilver",
+  "Venture",
+  "VentureOne",
+  "Savor",
+  "QuicksilverOne"
+]
+
 def randomDateGenerator():
   extraDay = [1,0,1,0,1,0,1,1,0,1,0,1]
   month = random.randint(1,12)
@@ -56,12 +64,16 @@ class FirebaseClient():
     return self.db.collection('users').document(user_id)
 
   def generate_user(self):
-    return self.add_user(self.faker.first_name(), self.faker.last_name(), self.faker.address())
+    card = random.choice(credit_cards)
+    points = random.randint(1000, 8000)
+    return self.add_user(self.faker.first_name(), self.faker.last_name(), card, points)
 
-  def add_user(self,first, last, address):
+  def add_user(self,first, last, card, points):
     user = {
       "first":first, 
-      "last":last
+      "last":last,
+      "card": card,
+      "points": points,
     }
     return self.db.collection('users').add(user)
 
