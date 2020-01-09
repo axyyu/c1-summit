@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Search from './components/search.js'
-import Suggestion from './components/Suggestion'
+import FriendCard from './components/FriendCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-const friendSuggestions = ['Christina Lu', 'Emily Lu']
-
-const SearchPage = () => (
-  <div style={{ margin: '30px 100px' }}>
-    <button className='button'>
-      Next <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
-    </button>
-    <h1>Find food with friends</h1>
-    <Search placeholder='Who are you going with?' />
-    <Suggestion name='Christina Lu' />
-    <Search placeholder='What are you feeling?' />
-  </div>
-)
-
+const SearchPage = () => {
+  const friendList = ['Friend One', 'Friend Two', 'Friend Three']
+  return (
+    <div style={{ margin: '30px 100px' }}>
+      <button style={{ float: 'right', width: '100px' }}>
+        Next{' '}
+        <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
+      </button>
+      <h1>Find food with friends</h1>
+      <div style={{ width: '80%' }}>
+        <Search
+          placeholder='Who are you going with?'
+          resultsList={friendList}
+        />
+        <div>
+          {friendList.map(friend => (
+            <FriendCard name={friend} />
+          ))}
+        </div>
+        <Search placeholder='What are you feeling?' resultsList={friendList} />
+      </div>
+    </div>
+  )
+}
 export default SearchPage

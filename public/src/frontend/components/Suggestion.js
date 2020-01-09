@@ -1,9 +1,10 @@
 import React from 'react'
 
 const suggestionStyle = {
-  border: '1px solid #C4C4C4',
+  border: '1px solid #CAD3C8',
   padding: '10px',
-  width: '80%'
+  width: '80%',
+  color: '#2C3A47'
 }
 
 const Suggestion = ({ name }) => <div style={suggestionStyle}>{name}</div>
