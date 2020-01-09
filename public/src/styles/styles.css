@@ -47,7 +47,7 @@ button:focus {
 }
 .dropdown-check-list .anchor:after {
   position: absolute;
-  content: "";
+  content: '';
   border-left: 2px solid black;
   border-top: 2px solid black;
   padding: 5px;
@@ -78,4 +78,9 @@ button:focus {
 }
 .dropdown-check-list.visible .items {
   display: block;
+}
+
+::placeholder {
+  color: #2c3a47;
+  opacity: 1;
 }

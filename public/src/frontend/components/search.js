@@ -8,7 +8,7 @@ const searchBar = {
   width: '500px'
 }
 
-const Search = ({ placeholder, resultsList }) => {
+const Search = ({ placeholder, resultsList, members, setMembers }) => {
   const searchBar = {
     marginTop: '50px',
     marginBottom: '30px'
@@ -18,7 +18,7 @@ const Search = ({ placeholder, resultsList }) => {
     width: '100%',
     padding: '10px',
     outline: 'none',
-    border: '1px solid #2C3A47',
+    border: '1px solid #CAD3C8',
     fontSize: '1em'
   }
 
@@ -39,7 +39,12 @@ const Search = ({ placeholder, resultsList }) => {
         {active && (
           <div>
             {resultsList.map(item => {
-              return <Suggestion name={item} />
+              return (
+                <Suggestion
+                  name={item}
+                  onClick={() => setMembers([...members, item])}
+                />
+              )
             })}
           </div>
         )}

@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const SearchPage = () => {
-  const friendList = ['Friend One', 'Friend Two', 'Friend Three']
+  const testList = ['Friend One', 'Friend Two', 'Friend Three']
+  const [members, setMembers] = useState([])
   return (
     <div style={{ margin: '30px 100px' }}>
       <button style={{ float: 'right', width: '100px' }}>
@@ -14,14 +15,29 @@ const SearchPage = () => {
       </button>
       <h1>Find food with friends</h1>
       <div style={{ width: '80%' }}>
-        <Search placeholder='What are you feeling?' resultsList={friendList} />
         <Search
-          placeholder='Who are you going with?'
-          resultsList={friendList}
+          placeholder='What are you feeling?'
+          resultsList={testList}
+          members={members}
+          setMembers={setMembers}
+        />
+        <Search
+          placeholder={
+            members.length > 0
+              ? members.map(name => {
+                  return `${name}`
+                })
+              : 'Who are you going with?'
+          }
+          resultsList={testList}
         />
         <div>
-          {friendList.map(friend => (
-            <FriendCard name={friend} />
+          {testList.map(friend => (
+            <FriendCard
+              name={friend}
+              members={members}
+              setMembers={setMembers}
+            />
           ))}
         </div>
       </div>
