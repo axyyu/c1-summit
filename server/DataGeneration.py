@@ -18,6 +18,8 @@ def PullandSort():
         if raw["total"] == 0:
             break
         for resta in raw["businesses"]:
+            print(resta)
+            print("\n")
             fulladdress = str(resta["location"]["address1"]) + " " + str(resta["location"]["city"]) + ", " + \
                 str(resta["location"]["state"]) + " " + str(resta["location"]["zip_code"])
 
@@ -26,6 +28,7 @@ def PullandSort():
             restaurants.append(Restaurant(resta["name"],coordinates, categories, fulladdress, resta["image_url"]))
             check += 1
         offset += 50
+PullandSort()
 
     return restaurants
 

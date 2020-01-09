@@ -2,35 +2,48 @@ import React, { useState } from 'react'
 import Search from './components/search.js'
 import FriendCard from './components/FriendCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+const tagStyle = {
+  padding: '5px 0'
+}
 
 const SearchPage = () => {
-  const testList = ['Friend One', 'Friend Two', 'Friend Three']
+  const testList = ['Friend One', 'Friend Two', 'Friend Three', 'Friend Four']
   const [members, setMembers] = useState([])
+  const Tag = ({ text }) => (
+    <div style={tagStyle}>
+      {text}{' '}
+      <FontAwesomeIcon
+        icon={faTimes}
+        style={{ float: 'right', color: '#B33771', cursor: 'pointer' }}
+        onClick={() => setMembers(members.filter(item => item !== text))}
+      />
+    </div>
+  )
   return (
     <div style={{ margin: '30px 100px' }}>
-      <button style={{ float: 'right', width: '100px' }}>
-        Next{' '}
-        <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
-      </button>
-      <h1>Find food with friends</h1>
+      <a href='results'>
+        <button style={{ float: 'right', width: '100px', zIndex: '1' }}>
+          Next{' '}
+          <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
+        </button>
+      </a>
       <div style={{ width: '80%' }}>
+        <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
+        <h4>What are you feeling?</h4>
         <Search
-          placeholder='What are you feeling?'
+          placeholder='Add options...'
           resultsList={testList}
           members={members}
           setMembers={setMembers}
         />
-        <Search
-          placeholder={
-            members.length > 0
-              ? members.map(name => {
-                  return `${name}`
-                })
-              : 'Who are you going with?'
-          }
-          resultsList={testList}
-        />
+        <h4>Who are you going with?</h4>
+        {members.map(name => (
+          <Tag text={name} />
+        ))}
+        <Search placeholder='Add group members...' resultsList={testList} />
+        <h4>Suggested Friends</h4>
         <div>
           {testList.map(friend => (
             <FriendCard
@@ -44,4 +57,5 @@ const SearchPage = () => {
     </div>
   )
 }
+
 export default SearchPage
