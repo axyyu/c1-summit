@@ -14,6 +14,7 @@ const SearchPage = () => {
       </button>
       <h1>Find food with friends</h1>
       <div style={{ width: '80%' }}>
+        <Search placeholder='What are you feeling?' resultsList={friendList} />
         <Search
           placeholder='Who are you going with?'
           resultsList={friendList}
@@ -23,7 +24,6 @@ const SearchPage = () => {
             <FriendCard name={friend} />
           ))}
         </div>
-        <Search placeholder='What are you feeling?' resultsList={friendList} />
       </div>
     </div>
   )
