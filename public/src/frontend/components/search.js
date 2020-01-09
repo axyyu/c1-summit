@@ -21,12 +21,11 @@ class Search extends React.Component {
     }
 
     const input = {
-      borderRadius: '20px',
-      width: '60%',
+      width: '80%',
       padding: '10px',
       outline: 'none',
-      borderWidth: '3px',
-      borderColor: '#C9C9C9'
+      border: '1px solid #CAD3C8',
+      fontSize: '1em'
     }
 
     return (
