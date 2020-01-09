@@ -24,9 +24,9 @@ class GoogleMap extends React.Component {
     }
 
     displayRestaurant = () => {
-        return <Marker key={index} id={index} position={{
-           lat: restaurant.latitude,
-           lng: restaurant.longitude
+        return <Marker position={{
+           lat: this.state.restaurant.latitude,
+           lng: this.state.restaurant.longitude
          }}
          onClick={() => console.log("You clicked me!")} /> //replace with some function
       }
@@ -35,15 +35,15 @@ class GoogleMap extends React.Component {
         const mapStyle = {
             width: '40%',
             height: '40%'
+            
         };
 
         return (
             <div>
                  <Map
-                    style={mapStyle}
                     google={this.props.google}
                     zoom={8}
-                    style={mapStyles}
+                    style={mapStyle}
                     initialCenter={{ lat: 47.444, lng: -122.176 }} //change default center to first suggested location 
                 />
                 {this.displayFriends()}
@@ -53,4 +53,6 @@ class GoogleMap extends React.Component {
     }
 }
 
-export default GoogleMap
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyAiKw1PKQB59ICN0P4AODiRlLIuFcgUVYc'
+})(GoogleMap);
