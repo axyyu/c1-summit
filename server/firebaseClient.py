@@ -46,8 +46,11 @@ def randomTimeGenerator():
 class FirebaseClient():
 
   def __init__(self):
-    cred = credentials.Certificate("./firebase.json")
-    firebase_admin.initialize_app(cred)
+    try:
+      cred = credentials.Certificate("./firebase.json")
+      firebase_admin.initialize_app(cred)
+    except(err):
+      print(err)
 
     self.db = firestore.client()
     self.faker = Faker()
@@ -65,7 +68,7 @@ class FirebaseClient():
 
   def generate_user(self):
     card = random.choice(credit_cards)
-    points = random.randint(1000, 8000)
+    points = random.randint(100, 8000)
     return self.add_user(self.faker.first_name(), self.faker.last_name(), card, points)
 
   def add_user(self, first, last, card, points):
