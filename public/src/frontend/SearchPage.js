@@ -42,6 +42,7 @@ const SearchPage = () => {
       })
       .then(content => {
         const jsonData = JSON.parse(content)
+        console.log(jsonData.places)
         setResults(jsonData.places)
         setLoadingMap(false)
       })

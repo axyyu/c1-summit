@@ -51,6 +51,7 @@ def final_area(tot_trans):
     x = -1
     y = -1
     z = -1
+    #print(hull)
     for entry in hull[0]:
         #file.write(str(entry[0]) + ","+str(entry[1])+"\n")
         d = measure(hull[1][0], hull[1][1], entry[0], entry[1]) 
