@@ -1,81 +1,81 @@
-import React, { useState, useEffect } from "react";
-import Search from "./components/search.js";
-import FriendCard from "./components/FriendCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
-import MapPage from "./MapPage";
+import React, { useState, useEffect } from 'react'
+import Search from './components/search.js'
+import FriendCard from './components/FriendCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+import MapPage from './MapPage'
 
 const tagStyle = {
-  padding: "5px 0"
-};
+  padding: '5px 0'
+}
 
 const retreivingData = () => {
-  fetch("http://127.0.0.1:5000/api/users", {})
+  fetch('http://127.0.0.1:5000/api/users', {})
     .then(res => {
-      res.json();
+      res.json()
     })
     .then(content => {
-      return content;
-    });
-};
+      return content
+    })
+}
 
 const SearchPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [users, setUsers] = useState([]);
-  const [members, setMembers] = useState([]);
-  const [memberIDs, setMemberIDs] = useState([]);
-  const [showMap, setShowMap] = useState(false);
-  const [loadingMap, setLoadingMap] = useState(false);
-  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [users, setUsers] = useState([])
+  const [members, setMembers] = useState([])
+  const [memberIDs, setMemberIDs] = useState([])
+  const [showMap, setShowMap] = useState(false)
+  const [loadingMap, setLoadingMap] = useState(false)
+  const [results, setResults] = useState([])
 
   const outputGeneration = users => {
-    fetch("http://127.0.0.1:5000/api/location", {
-      method: "post",
+    fetch('http://127.0.0.1:5000/api/location', {
+      method: 'post',
       body: JSON.stringify(users),
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       }
     })
       .then(res => {
-        console.log(res);
-        return res.json();
+        console.log(res)
+        return res.json()
       })
       .then(content => {
-        console.log(content);
+        console.log(content)
         // const jsonData = JSON.parse(content)
 
-        setResults(content);
-        setLoadingMap(false);
-      });
-  };
+        setResults(content)
+        setLoadingMap(false)
+      })
+  }
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
-      const fetcher = await fetch("http://127.0.0.1:5000/api/users");
-      const response = await fetcher.json();
-      const arr = Object.keys(response).map(key => [key, response[key]]);
-      setUsers(arr);
-      console.log(arr);
-      setIsLoading(false);
+      setIsLoading(true)
+      const fetcher = await fetch('http://127.0.0.1:5000/api/users')
+      const response = await fetcher.json()
+      const arr = Object.keys(response).map(key => [key, response[key]])
+      setUsers(arr)
+      console.log(arr)
+      setIsLoading(false)
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const Tag = ({ text, id }) => (
     <div style={tagStyle}>
-      {text}{" "}
+      {text}{' '}
       <FontAwesomeIcon
         icon={faTimes}
-        style={{ float: "right", color: "#B33771", cursor: "pointer" }}
+        style={{ float: 'right', color: '#B33771', cursor: 'pointer' }}
         onClick={() => {
-          setMembers(members.filter(item => item !== text));
-          setMemberIDs(memberIDs.filter(item => item !== id));
+          setMembers(members.filter(item => item !== text))
+          setMemberIDs(memberIDs.filter(item => item !== id))
         }}
       />
     </div>
-  );
+  )
 
   return (
     <div>
@@ -84,28 +84,28 @@ const SearchPage = () => {
       ) : showMap ? (
         <MapPage setShowMap={setShowMap} resultPlaces={results} />
       ) : (
-        <div style={{ margin: "30px 100px" }}>
+        <div style={{ margin: '30px 100px' }}>
           <button
-            style={{ float: "right", width: "100px", zIndex: "1" }}
+            style={{ float: 'right', width: '100px', zIndex: '1' }}
             onClick={() => {
-              setShowMap(true);
-              setLoadingMap(true);
-              console.log(memberIDs);
-              outputGeneration({ user_ids: memberIDs });
+              setShowMap(true)
+              setLoadingMap(true)
+              console.log(memberIDs)
+              outputGeneration({ user_ids: memberIDs })
             }}
           >
-            Next{" "}
-            <FontAwesomeIcon icon={faChevronRight} style={{ float: "right" }} />
+            Next{' '}
+            <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
           </button>
 
-          <div style={{ width: "80%" }}>
-            <h1 style={{ color: "#6D214F" }}>Find food with friends</h1>
+          <div style={{ width: '80%' }}>
+            <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
             <h4>Who are you going with?</h4>
             {members.map(name => (
               <Tag text={name} id={memberIDs[members.indexOf(name)]} />
             ))}
             <Search
-              placeholder="Add group members..."
+              placeholder='Search for group members...'
               resultsList={users}
               members={members}
               setMembers={setMembers}
@@ -118,7 +118,7 @@ const SearchPage = () => {
                 .filter(user => !memberIDs.includes(user[0]))
                 .map(user => (
                   <FriendCard
-                    name={user[1].first + " " + user[1].last}
+                    name={user[1].first + ' ' + user[1].last}
                     id={user[0]}
                     members={members}
                     setMembers={setMembers}
@@ -131,7 +131,7 @@ const SearchPage = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default SearchPage;
+export default SearchPage

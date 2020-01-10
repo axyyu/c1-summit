@@ -93,21 +93,28 @@ const MapPage = ({
               position: 'absolute'
             }}
           >
-            {resultPlaces.map(restaurant => (
-              <div onClick={() => setSelectedRestaurant(restaurant)}>
-                <Places
-                  name={restaurant.name}
-                  rating={restaurant.rating}
-                  address={restaurant.formatted_address}
-                  price={restaurant.price_level}
-                  numReviews={restaurant.user_ratings_total}
-                  isSelected={
-                    restaurant.name == selectedRestaurant.name ? true : false
-                  }
-                  cuisine={restaurant.cuisine}
-                />
-              </div>
-            ))}
+            {resultPlaces.map(restaurant => {
+              return (
+                <div onClick={() => setSelectedRestaurant(restaurant)}>
+                  <Places
+                    name={restaurant.name}
+                    rating={restaurant.rating}
+                    address={restaurant.formatted_address}
+                    price={restaurant.price_level}
+                    numReviews={restaurant.user_ratings_total}
+                    isSelected={
+                      restaurant.name == selectedRestaurant.name ? true : false
+                    }
+                    isRewards={
+                      restaurant.rating > 4.4 &&
+                      restaurant.user_ratings_total > 1050
+                    }
+                    rewardsPercent={Math.sqrt(restaurant.rating)}
+                    cuisine={restaurant.cuisine}
+                  />
+                </div>
+              )
+            })}
           </div>
           <div
             className='resultMap'
