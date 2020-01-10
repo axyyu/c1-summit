@@ -39,3 +39,4 @@ uritemplate==3.0.1
 urllib3==1.25.7
 Werkzeug==0.16.0
 yelpapi==2.4.0
+gunicorn

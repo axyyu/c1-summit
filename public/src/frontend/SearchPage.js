@@ -8,6 +8,31 @@ const tagStyle = {
   padding: '5px 0'
 }
 
+const retreivingData = () => {
+  fetch('http://127.0.0.1:5000/api/users', {})
+    .then(res => {
+      res.json()
+    })
+    .then(content => {
+      return content
+    })
+}
+
+//const outputGeneration = (ArrayofPeople) => {
+//    fetch('http://127.0.0.1:5000/api/users', {})
+//        .then((res) => {
+//            res.json()
+//        }
+//        ).then((content) => {
+//            return content
+//        }
+//        )
+//}
+
+/***
+ * peopleArray = JSON.stringify({'people': ['Anna', 'ty']})
+ * */
+
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])

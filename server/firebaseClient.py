@@ -32,7 +32,7 @@ def randomDateGenerator():
   return month + "/" + day + "/" + str(year)
 
 def randomTimeGenerator():
-  hour = random.randint(1,23)
+  hour = random.randint(12,20)
   mins = random.randint(1,59)
   sec = random.randint(1,59)
   if len(str(hour)) == 1:
