@@ -31,10 +31,13 @@ class GoogleMap extends React.Component {
     return (
       <Marker
         position={{
-          lat: this.props.restaurants[0].location.latitude,
-          lng: this.props.restaurants[0].location.longitude
+          lat: this.props.selectedRestaurant.location.latitude,
+          lng: this.props.selectedRestaurant.location.longitude
         }}
         onClick={() => console.log('You clicked me!')}
+        icon={{
+          url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        }}
       />
     ) //replace with some function
   }
@@ -57,10 +60,14 @@ class GoogleMap extends React.Component {
           initialCenter={initialCenter} //change default center to first suggested location
         >
           <Marker key='tester' id='1' position={initialCenter} />
-          <Marker key='restaurant' id='2' position={{
-              lat: this.props.restaurants[0].location.latitude,
-              lon: this.props.restaurants[0].location.longitude  
-            }} />
+          <Marker
+            key='restaurant'
+            id='2'
+            position={{
+              lat: this.props.selectedRestaurant.location.latitude,
+              lon: this.props.selectedRestaurant.location.longitude
+            }}
+          />
           {this.displayFriends()}
           {this.displayRestaurant()}
         </Map>

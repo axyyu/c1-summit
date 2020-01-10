@@ -42,7 +42,7 @@ const MapPage = ({
       rating: '4.5/5',
       address: '7937 Tysons Corner Center',
       price: '$',
-      location: { latitude: 38.9175726, longitude: -77.2377628},
+      location: { latitude: 38.9175726, longitude: -77.2377628 },
       numReviews: 500
     },
     {
@@ -55,7 +55,9 @@ const MapPage = ({
     }
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
-  const [restaurant, setRestaurant] = useState(restaurants[0])
+  const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
+
+  console.log(selectedRestaurant.name)
 
   return (
     <div>
@@ -77,20 +79,22 @@ const MapPage = ({
                 <div style={{display:'inline-block', verticalAlign:'bottom'}}>Filter: <Filter /></div>
             </div>
           </div>
-          <div style={{ marginTop: '40px', display:'block', position:'absolute'}}>
+          <div style={{ marginTop: '40px', display:'block', position:'absolute' }}>
             {restaurants.map(restaurant => (
-              <Places
-                style={{position:'absolute'}}
-                name={restaurant.name}
-                rating={restaurant.rating}
-                address={restaurant.address}
-                price={restaurant.price}
-                onClick={() => setRestaurant(restaurant)}
-                numReviews={restaurant.numReviews}
-              />
+              <div onClick={() => setSelectedRestaurant(restaurant)}>
+                <Places
+                  name={restaurant.name}
+                  rating={restaurant.rating}
+                  address={restaurant.address}
+                  price={restaurant.price}
+                  numReviews={restaurant.numReviews}
+                  isSelected={
+                    restaurant.name == selectedRestaurant.name ? true : false
+                  }
+                />
+              </div>
             ))}
           </div>
-
           <div
             className='resultMap'
             style={{ marginLeft: '500px', textAlign: 'center', display: 'block', marginTop:'40px'}}
@@ -99,6 +103,7 @@ const MapPage = ({
               style={{ margin: 'auto', position:'relative'}}
               friends={friends}
               restaurants={restaurants}
+              selectedRestaurant={selectedRestaurant}
               currLocation={currLocation}
             />
             <div style={{display:'block', verticalAlign:'bottom', marginLeft:'200px', marginTop:'400px', position:'absolute'}}>
@@ -107,7 +112,7 @@ const MapPage = ({
                 textAlign: 'center',
                 verticalAlign:'bottom'
               }}
-              restaurant={restaurant}
+              restaurant={selectedRestaurant}
             />
           </div>
           </div>
