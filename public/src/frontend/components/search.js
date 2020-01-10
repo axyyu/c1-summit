@@ -8,7 +8,14 @@ const searchBar = {
   width: '500px'
 }
 
-const Search = ({ placeholder, resultsList, members, setMembers }) => {
+const Search = ({
+  placeholder,
+  resultsList,
+  members,
+  setMembers,
+  memberIDs,
+  setMemberIDs
+}) => {
   const searchBar = {
     marginTop: '10px',
     marginBottom: '30px'
@@ -41,20 +48,30 @@ const Search = ({ placeholder, resultsList, members, setMembers }) => {
         {active && (
           <div>
             {resultsList
-              .filter(str => {
-                return str.toLowerCase().indexOf(query.toLowerCase()) >= 0
+              .filter(user => {
+                return !members.includes(user[1].first + ' ' + user[1].last)
               })
-              .filter(str => !members.includes(str))
+              .filter(user => {
+                return (
+                  (user[1].first + ' ' + user[1].last)
+                    .toLowerCase()
+                    .indexOf(query.toLowerCase()) >= 0
+                )
+              })
               .slice(0, 5)
-              .map(item => {
+              .map(user => {
                 return (
                   <div
                     style={{ cursor: 'pointer' }}
                     onMouseDown={() => {
-                      setMembers([...members, item])
+                      setMembers([
+                        ...members,
+                        user[1].first + ' ' + user[1].last
+                      ])
+                      setMemberIDs([...memberIDs, user[0]])
                     }}
                   >
-                    <Suggestion name={item} />
+                    <Suggestion name={user[1].first + ' ' + user[1].last} />
                   </div>
                 )
               })}
