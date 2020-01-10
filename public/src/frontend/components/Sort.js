@@ -1,18 +1,12 @@
 import React from 'react'
 import Tree from 'react-dropdown-tree-select'
-import "../../styles/styles.css"
-
+import 'react-dropdown-tree-select/dist/styles.css'
 const Sort = () => {
     const sort = [
         {label: 'Rating'},
         {label: 'Distance'},
-        {label: 'Category'},
         {label: 'Price'}  
     ]
-
-    const onChange = (currentNode, selectedNodes) => {
-        console.log("path::", currentNode.path);
-      };
       
       const assignObjectPaths = (obj, stack) => {
         Object.keys(obj).forEach(k => {
@@ -25,12 +19,12 @@ const Sort = () => {
       };
 
     assignObjectPaths(sort);
+    
     return(
-        <div>
+        <div style={{marginRight:'50px'}}>
             <Tree 
                 data={sort}
-                mode='radioSelect'
-                onChange={onChange}
+                mode='simpleSelect'
                 className="bootstrap-demo"
             />
         </div>
