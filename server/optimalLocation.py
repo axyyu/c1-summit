@@ -30,13 +30,15 @@ def find_optimal_location(user_ids):
   top_categories = make_prediction(users)
   recommendations = machineLearning(users, trans, top_categories, price)
 
-  _, center, radius, hull = final_area(tot_locs)
+  _, center, radius, hull = final_area(trans)
 
   cost = get_cost(price)
 
-  return (search_cuisineAll(cost, top_categories, center, radius), hull)
+  return (search_cuisineAll(cost, recommendations, center, radius), hull)
 
 places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
+
+print(len(places))
 
 within_convex_hull = []
 for shop in places[0]['places']:
@@ -47,10 +49,11 @@ for shop in places[0]['places']:
 #print(len(places[0]['places']))
 #print(len(within_convex_hull))
   
-for entry in places[0]['places']:
-  print(str(entry["latitude"])+","+ str(entry['longitude']))
+#for entry in places[0]['places']:
+  #print(str(entry["latitude"])+","+ str(entry['longitude']))
 
 print("-----")
 
 for entry in within_convex_hull:
-  print(str(entry["latitude"])+","+ str(entry['longitude']))
+  print(entry)
+  #print(str(entry["latitude"])+","+ str(entry['longitude']))

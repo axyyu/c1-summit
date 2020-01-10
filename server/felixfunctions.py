@@ -4,6 +4,7 @@ import numpy as np
 from Profile import *
 import math
 from matplotlib.path import Path
+from bisect import bisect_left 
 
 from firebaseClient import FirebaseClient, credit_cards
 #def get_avg_spending_v1( , spending_arr):
@@ -63,6 +64,22 @@ def final_area(tot_trans):
     #print("%f, %f and %f, %f has distance: %s" % (w,x,y,z,str(d)))
     #file.close()
     return (hull[0], hull[1], d, hull[2])
+
+def int_to_dollars(i):
+    return i * 10
+
+def BinarySearch(a, x): 
+    i = bisect_left(a, x) 
+    if i: 
+        return (i-1) 
+    else: 
+        return -1
+
+def priority_rest_by_rewards(restaurants, user):
+    restaurants = sorted(restaurants, key=lambda shop: shop["price_level"])
+    target = user['median_spending']/10
+    i = BinarySearch(restaurants, target)
+    return restaurants[0:i]
 
 def get_avg_spending_v2(arrayProfile):
     low_avg = arrayProfile[0]["averageSpending"]
@@ -194,4 +211,3 @@ def point_inside_hull_v1(point, hull):
         return False
     hull_path = Path( hull.points[hull.vertices] )
     return hull_path.contains_point((point[0],point[1]))
-        
