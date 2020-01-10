@@ -2,19 +2,17 @@ import requests
 import json
 import math
 import time
-
-# Returns a JSON of up to 60 restaurants based on the given parameters.
-# Input:
-# {
-#     "lat": 38.889237,
-#     "lng": -77.000165,
-#     "cost": 1.3,
-#     "cuisine": "thai",
-#     "radius": 8000
-# }
+import random
 
 
-def search_cuisineAll(json_body):
+def search_cuisineAll(json_body, midpt, radius):
+    # Search_cuisineALl returns a JSON of up to 60 restaurants based on the given parameters.
+    # Sample Input:
+    # {
+    #     "cost": 1.3,
+    #     "cuisine": "thai"
+    # }
+    # and midpt = 38.889237, -77.000165 (lat, long), radius = 8000
     def search_cuisine20(pagetoken, placeList):
         APIKEY = "AIzaSyAiKw1PKQB59ICN0P4AODiRlLIuFcgUVYc"
         url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={cuisine}&type=restaurant&location={lat},{lng}&radius={radius}&opennow&minprice={minprice}&maxprice={maxprice}&key={APIKEY}{pagetoken}".format(
@@ -33,12 +31,11 @@ def search_cuisineAll(json_body):
                                         "user_ratings_total": result["user_ratings_total"]})
         pagetoken = res.get("next_page_token", None)
         return pagetoken, placeList
-    lat = json_body.get("lat")
-    lng = json_body.get("lng")
+    lat, lng = midpt
     cost = json_body.get("cost")
     minprice, maxprice = int(math.floor(cost)), int(math.ceil(cost))
     cuisine = json_body.get("cuisine")
-    radius = json_body.get("radius")
+    radius = int(radius)
     pagetoken = None
     placeList = {'places': []}
 
