@@ -17,7 +17,8 @@ const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 //const [location, setLocation] = useState()
 
 const MapPage = () => {
-    const restaurants = [{name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', lat: 47.444, lng: -122.176}]
+    const restaurants = [{name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', location:{lat: 47.444, lng: -122.176}}]
+    const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
     return (
      <div style={drop}> 
        <a href='/'>
@@ -33,7 +34,7 @@ const MapPage = () => {
                     <Places name={restaurant.name} rating={restaurant.rating} address={restaurant.address} price={restaurant.price}/>
                 )
             )}
-            <GoogleMap style={{margin:'auto'}}/>
+            <GoogleMap style={{margin:'auto'}} friends={friends} restaurants={restaurants}/>
         </div>
       </div>
     );

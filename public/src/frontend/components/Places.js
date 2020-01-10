@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Places = () => {
+const Places = ({name, rating, price, address}) => {
 
     return(
         <div>                        
