@@ -7,6 +7,7 @@ const friendCardStyle = {
   width: '20%',
   float: 'left',
   marginRight: '5%',
+  marginBottom: '20px',
   textAlign: 'center'
 }
 

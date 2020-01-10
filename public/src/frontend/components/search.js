@@ -23,6 +23,7 @@ const Search = ({ placeholder, resultsList, members, setMembers }) => {
   }
 
   const [active, setActive] = useState(false)
+  const [query, setQuery] = useState('')
 
   return (
     <div style={searchBar}>
@@ -35,17 +36,28 @@ const Search = ({ placeholder, resultsList, members, setMembers }) => {
           placeholder={placeholder}
           onFocus={() => setActive(true)}
           onBlur={() => setActive(false)}
+          onChange={e => setQuery(e.target.value)}
         ></input>
         {active && (
           <div>
-            {resultsList.map(item => {
-              return (
-                <Suggestion
-                  name={item}
-                  onClick={() => setMembers([...members, item])}
-                />
-              )
-            })}
+            {resultsList
+              .filter(str => {
+                return str.toLowerCase().indexOf(query.toLowerCase()) >= 0
+              })
+              .filter(str => !members.includes(str))
+              .slice(0, 5)
+              .map(item => {
+                return (
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onMouseDown={() => {
+                      setMembers([...members, item])
+                    }}
+                  >
+                    <Suggestion name={item} />
+                  </div>
+                )
+              })}
           </div>
         )}
       </form>

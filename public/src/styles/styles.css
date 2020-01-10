@@ -30,6 +30,11 @@ button {
   -moz-appearance: none;
 }
 
+.places {
+  background-color: '#CAD3C8';
+  border-color: '#000000'
+}
+
 button:focus {
   outline: 1px solid #fff;
 }
