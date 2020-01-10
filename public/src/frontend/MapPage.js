@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const drop = {
-  textAlign: 'center',
   display: 'inline-block',
   marginLeft: '100px',
   marginTop: '30px'
@@ -29,28 +28,33 @@ const MapPage = () => {
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
   return (
     <div style={drop}>
-      <a href='/'>
-        <button style={{ width: '100px' }}>
-          &nbsp;&nbsp;&nbsp;&nbsp; Back
-          <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
-        </button>
-      </a>
-      <Drop title='Sort By' list={sort} />
-      <Drop title='Filter' list={filter} />
-      <div>
-        {restaurants.map(restaurant => (
-          <Places
-            name={restaurant.name}
-            rating={restaurant.rating}
-            address={restaurant.address}
-            price={restaurant.price}
+      <div className='resultListView'>
+        <a href='/'>
+          <button style={{ width: '100px' }}>
+            &nbsp;&nbsp;&nbsp;&nbsp; Back
+            <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
+          </button>
+        </a>
+        <Drop title='Sort By' list={sort} />
+        <Drop title='Filter' list={filter} />
+        <div>
+          {restaurants.map(restaurant => (
+            <Places
+              name={restaurant.name}
+              rating={restaurant.rating}
+              address={restaurant.address}
+              price={restaurant.price}
+            />
+          ))}
+        </div>
+
+        <div className='resultMap' style={{ marginLeft: '500px' }}>
+          <GoogleMap
+            style={{ margin: 'auto' }}
+            friends={friends}
+            restaurants={restaurants}
           />
-        ))}
-        <GoogleMap
-          style={{ margin: 'auto' }}
-          friends={friends}
-          restaurants={restaurants}
-        />
+        </div>
       </div>
     </div>
   )
