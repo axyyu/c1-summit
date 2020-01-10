@@ -96,7 +96,7 @@ const MapPage = () => {
         </div>
       </div>
     </div>
-    <div><Direction style={{textAlign:'center', marginTop:'5000px', position:'absolute'}} restaurant={restaurant}/></div>
+    <div><Direction style={{float:'right', marginLeft:'600px', marginTop:'5000px', position:'absolute'}} restaurant={restaurant}/></div>
     </div>
   )
 }

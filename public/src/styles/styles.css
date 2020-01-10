@@ -41,7 +41,9 @@ button:focus {
 
 .dropdown-check-list {
   display: inline-block;
-  outline: none;
+  background-color: white;
+  border-color: #CAD3C8;
+  border-width: 2px;  
 }
 .dropdown-check-list .anchor {
   position: relative;
@@ -72,7 +74,7 @@ button:focus {
   padding: 2px;
   display: none;
   margin: 0;
-  border: 1px solid #ccc;
+  border: 2px solid #CAD3C8;
   border-top: none;
 }
 .dropdown-check-list ul.items li {
@@ -83,6 +85,7 @@ button:focus {
 }
 .dropdown-check-list.visible .items {
   display: block;
+  border: 2px solid #CAD3C8;
 }
 
 ::placeholder {
