@@ -24,36 +24,29 @@ class GoogleMap extends React.Component {
     //      onClick={() => console.log("You clicked me!")} /> //replace with some function
     //   }
 
-
     const mapStyle = {
-        width: '50%',
-        height: '50%'
-    };
-
-        const [location, setLocation] = useState(restaurants[0].location);
-        const initialCenter = {lat: 47.444, lng: -122.176}
-
-        return (
-            <div style={{textAlign:'right'}}>
-                 <Map
-                    google={this.props.google}
-                    zoom={8}
-                    style={mapStyle}
-                    initialCenter={initialCenter} //change default center to first suggested location 
-                >
-                <Marker 
-                    key='tester' 
-                    id= '1' 
-                    position={initialCenter}
-                    />
-                {this.displayFriends()}
-                {this.displayRestaurant()}
-                </Map>
-            </div>
-        );
+      width: '50%',
+      height: '50%'
     }
 
+    const [location, setLocation] = useState(restaurants[0].location)
+    const initialCenter = { lat: 47.444, lng: -122.176 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAiKw1PKQB59ICN0P4AODiRlLIuFcgUVYc'
-})(GoogleMap)
+    return (
+      <div style={{ textAlign: 'right' }}>
+        <Map
+          google={this.props.google}
+          zoom={8}
+          style={mapStyle}
+          initialCenter={initialCenter} //change default center to first suggested location
+        >
+          <Marker key='tester' id='1' position={initialCenter} />
+          {this.displayFriends()}
+          {this.displayRestaurant()}
+        </Map>
+      </div>
+    )
+  }
+}
+
+export default GoogleMap
