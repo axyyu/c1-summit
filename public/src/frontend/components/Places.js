@@ -45,7 +45,7 @@ const Places = ({
               (Math.round(rewardsPercent * 100) / 100).toFixed(2) +
               '% higher rewards on your credit card for eating here.'}
         </p>
-        <p style={{ clear: 'both', color: '#CAD3C8' }}>
+        <p style={{ clear: 'both', color: '#2d3436' }}>
           {isEfficient &&
             'This restaurant will best use your (and your party\'s) rewards points'}
         </p>
