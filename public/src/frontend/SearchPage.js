@@ -2,14 +2,21 @@ import React, { useState } from 'react'
 import Search from './components/search.js'
 import FriendCard from './components/FriendCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronRight,
-  faTimes,
-  faUtensils
-} from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const tagStyle = {
   padding: '5px 0'
+}
+
+const retreivingData = () => {
+    fetch('http://127.0.0.1:5000/api/users', {})
+        .then((res) => {
+            res.json()
+        }
+        ).then((content) => {
+            return content
+        }
+        )
 }
 
 const SearchPage = () => {
@@ -21,7 +28,7 @@ const SearchPage = () => {
     'Willie Xia',
     'Andrew Wang',
     'Felix Hu'
-  ]
+    ]
   const [members, setMembers] = useState([])
   const Tag = ({ text }) => (
     <div style={tagStyle}>
@@ -42,16 +49,20 @@ const SearchPage = () => {
         </button>
       </a>
       <div style={{ width: '80%' }}>
-        <h1 style={{ color: '#6D214F' }}>
-          <FontAwesomeIcon icon={faUtensils} style={{ float: 'right' }} />
-          Find food with friends
-        </h1>
+        <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
+        <h4>What are you feeling?</h4>
+        <Search
+          placeholder='Add options...'
+          resultsList={testList}
+          members={members}
+          setMembers={setMembers}
+        />
         <h4>Who are you going with?</h4>
         {members.map(name => (
           <Tag text={name} />
         ))}
         <Search
-          placeholder='Search group members...'
+          placeholder='Add group members...'
           resultsList={testList}
           members={members}
           setMembers={setMembers}

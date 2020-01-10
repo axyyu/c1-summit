@@ -2,7 +2,7 @@ from Profile import *
 import statistics
 import json
 
-def create_person(transactions_list, location):
+def create_person(transactions_list):
     # list of restaurant transactions
     newProfile = Profile()
     tot_spend = 0
@@ -29,7 +29,7 @@ def create_person(transactions_list, location):
     prices.sort()
     # newProfile.medianSpending = statistics.median(prices)
     avgspend = newProfile.totalSpent/len(newProfile.transactions)
-    newProfile.favorites = reversed([x for x in sorted(newProfile.favorites.items(), key=lambda kv: kv[1])])
+    newProfile.favorites = list(reversed([x for x in sorted(newProfile.favorites.items(), key=lambda kv: kv[1])]))
     newProfile.category_scores = category_scores
     return newProfile
 
