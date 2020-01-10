@@ -8,6 +8,17 @@ const tagStyle = {
   padding: '5px 0'
 }
 
+const retreivingData = () => {
+    fetch('http://127.0.0.1:5000/api/users', {})
+        .then((res) => {
+            res.json()
+        }
+        ).then((content) => {
+            return content
+        }
+        )
+}
+
 const SearchPage = () => {
   const testList = [
     'Emily Lu',
@@ -17,7 +28,7 @@ const SearchPage = () => {
     'Willie Xia',
     'Andrew Wang',
     'Felix Hu'
-  ]
+    ]
   const [members, setMembers] = useState([])
   const Tag = ({ text }) => (
     <div style={tagStyle}>
