@@ -18,16 +18,18 @@ const retreivingData = () => {
     })
 }
 
-//const outputGeneration = (ArrayofPeople) => {
-//    fetch('http://127.0.0.1:5000/api/users', {})
-//        .then((res) => {
-//            res.json()
-//        }
-//        ).then((content) => {
-//            return content
-//        }
-//        )
-//}
+const outputGeneration = (ArrayofIDS) => {
+    fetch('http://127.0.0.1:5000/api/location', {
+        method = "POST",
+        body: JSON.stringify({ "user_ids": ArrayofIDS })
+    }).then((res) => {
+        res.json()
+    }
+    ).then((content) => {
+        return content
+    }
+    )
+}
 
 /***
  * peopleArray = JSON.stringify({'people': ['Anna', 'ty']})
