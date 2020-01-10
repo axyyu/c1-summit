@@ -30,7 +30,9 @@ const MapPage = ({
   coords,
   isGeolocationAvailable,
   isGeolocationEnabled,
-  positionError
+  positionError,
+  setShowMap,
+  resultPlaces
 }) => {
   const currLocation =
     !isGeolocationAvailable || !isGeolocationEnabled || !coords
@@ -38,29 +40,21 @@ const MapPage = ({
       : { lat: coords.latitude, lng: coords.longitude }
   const restaurants = [
     {
-      name: "McDonald's",
-      rating: '4.5/5',
-      address: '7937 Tysons Corner Center',
-      price: '$',
-      location: { latitude: 38.9175726, longitude: -77.2377628 },
-      numReviews: 500
-    },
-    {
-      name: 'Chick-Fil-A',
-      rating: '4/5',
-      address: '8461 Leesburg Pike Ste B',
-      price: '$',
-      location: { latitude: 47.444, longitude: -122.176 },
-      numReviews: 2345
+      name: 'Doyle',
+      formatted_address: '1500 New Hampshire Ave NW, Washington, DC 20036',
+      latitude: 38.910362,
+      longitude: -77.043081,
+      price_level: 3,
+      rating: 4.1,
+      user_ratings_total: 147,
+      cuisine: 'cocktailbars'
     }
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
   const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
 
-  console.log(selectedRestaurant.name)
-
   return (
-    <div>
+    <div style={{ backgroundColor: 'white' }}>
       <div>
         <div
           style={{ marginLeft: '30px', marginTop: '30px' }}
@@ -72,21 +66,17 @@ const MapPage = ({
             style={{ marginBottom: '20px', display: 'inline-block' }}
           >
             {' '}
-            <a href='/'>
-              <button
-                style={{
-                  width: '100px',
-                  marginRight: '70px',
-                  marginBottom: '20px'
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp; Back
-                <FontAwesomeIcon
-                  icon={faChevronLeft}
-                  style={{ float: 'left' }}
-                />
-              </button>
-            </a>
+            <button
+              onClick={() => setShowMap(false)}
+              style={{
+                width: '100px',
+                marginRight: '70px',
+                marginBottom: '20px'
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;&nbsp; Back
+              <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
+            </button>
             <div style={{ display: 'inline-block' }}>
               <div style={{ display: 'inline-block' }}>
                 Sort: <Sort />
@@ -103,17 +93,18 @@ const MapPage = ({
               position: 'absolute'
             }}
           >
-            {restaurants.map(restaurant => (
+            {resultPlaces.map(restaurant => (
               <div onClick={() => setSelectedRestaurant(restaurant)}>
                 <Places
                   name={restaurant.name}
                   rating={restaurant.rating}
-                  address={restaurant.address}
-                  price={restaurant.price}
-                  numReviews={restaurant.numReviews}
+                  address={restaurant.formatted_address}
+                  price={restaurant.price_level}
+                  numReviews={restaurant.user_ratings_total}
                   isSelected={
                     restaurant.name == selectedRestaurant.name ? true : false
                   }
+                  cuisine={restaurant.cuisine}
                 />
               </div>
             ))}

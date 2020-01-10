@@ -35,16 +35,20 @@ def find_optimal_location(user_ids):
   cost = get_cost(price)
 
   pl = (search_cuisineAll(cost, recommendations, center, radius), hull)
+  # print('\n', "places 1", places[0])
+  # print('\n', "places 2" places[0]['places'])
   within_convex_hull = []
   for shop in pl[0]['places']:
     coords = [ shop["latitude"], shop["longitude"] ]
     if point_inside_hull_v1(coords, pl[1]):
       within_convex_hull.append(shop)
+  #print(within_convex_hull)
+  return within_convex_hull
 
+# places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
 
-places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
+# print(len(places))
 
-#print(len(places))
 
 # within_convex_hull = []
 # for shop in places[0]['places']:
@@ -61,5 +65,5 @@ places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
 #print("-----")
 
 #for entry in within_convex_hull:
-  #print(entry)
+#  print(entry)
   #print(str(entry["latitude"])+","+ str(entry['longitude']))

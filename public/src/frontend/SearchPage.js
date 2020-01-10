@@ -3,6 +3,7 @@ import Search from './components/search.js'
 import FriendCard from './components/FriendCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+import MapPage from './MapPage'
 
 const tagStyle = {
   padding: '5px 0'
@@ -18,28 +19,36 @@ const retreivingData = () => {
     })
 }
 
-const outputGeneration = (ArrayofIDS) => {
-    fetch('http://127.0.0.1:5000/api/location', {
-        method: "POST",
-        body: JSON.stringify({ "user_ids": ArrayofIDS })
-    }).then((res) => {
-        res.json()
-    }
-    ).then((content) => {
-        return content
-    }
-    )
-}
-
-/***
- * peopleArray = JSON.stringify({'people': ['Anna', 'ty']})
- * */
-
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])
   const [members, setMembers] = useState([])
   const [memberIDs, setMemberIDs] = useState([])
+  const [showMap, setShowMap] = useState(false)
+  const [loadingMap, setLoadingMap] = useState(false)
+  const [results, setResults] = useState([])
+
+  const outputGeneration = users => {
+    fetch('http://127.0.0.1:5000/api/location', {
+      method: 'post',
+      body: JSON.stringify(users),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+      .then(res => {
+        console.log(res)
+        return res.json()
+      })
+      .then(content => {
+        console.log(content)
+        const jsonData = JSON.parse(content)
+
+        setResults(jsonData.places)
+        setLoadingMap(false)
+      })
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -67,44 +76,60 @@ const SearchPage = () => {
       />
     </div>
   )
+
   return (
-    <div style={{ margin: '30px 100px' }}>
-      <a href='results'>
-        <button style={{ float: 'right', width: '100px', zIndex: '1' }}>
-          Next{' '}
-          <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
-        </button>
-      </a>
-      <div style={{ width: '80%' }}>
-        <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
-        <h4>Who are you going with?</h4>
-        {members.map(name => (
-          <Tag text={name} id={memberIDs[members.indexOf(name)]} />
-        ))}
-        <Search
-          placeholder='Add group members...'
-          resultsList={users}
-          members={members}
-          setMembers={setMembers}
-          memberIDs={memberIDs}
-          setMemberIDs={setMemberIDs}
-        />
-        <h4>Suggested Friends</h4>
-        <div>
-          {users
-            .filter(user => !memberIDs.includes(user[0]))
-            .map(user => (
-              <FriendCard
-                name={user[1].first + ' ' + user[1].last}
-                id={user[0]}
-                members={members}
-                setMembers={setMembers}
-                memberIDs={memberIDs}
-                setMemberIDs={setMemberIDs}
-              />
+    <div>
+      {loadingMap ? (
+        <div>Loading</div>
+      ) : showMap ? (
+        <MapPage setShowMap={setShowMap} resultPlaces={results} />
+      ) : (
+        <div style={{ margin: '30px 100px' }}>
+          <button
+            style={{ float: 'right', width: '100px', zIndex: '1' }}
+            onClick={() => {
+              setShowMap(true)
+              setLoadingMap(true)
+              console.log(memberIDs)
+              outputGeneration({ user_ids: memberIDs })
+            }}
+          >
+            Next{' '}
+            <FontAwesomeIcon icon={faChevronRight} style={{ float: 'right' }} />
+          </button>
+
+          <div style={{ width: '80%' }}>
+            <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
+            <h4>Who are you going with?</h4>
+            {members.map(name => (
+              <Tag text={name} id={memberIDs[members.indexOf(name)]} />
             ))}
+            <Search
+              placeholder='Add group members...'
+              resultsList={users}
+              members={members}
+              setMembers={setMembers}
+              memberIDs={memberIDs}
+              setMemberIDs={setMemberIDs}
+            />
+            <h4>Suggested Friends</h4>
+            <div>
+              {users
+                .filter(user => !memberIDs.includes(user[0]))
+                .map(user => (
+                  <FriendCard
+                    name={user[1].first + ' ' + user[1].last}
+                    id={user[0]}
+                    members={members}
+                    setMembers={setMembers}
+                    memberIDs={memberIDs}
+                    setMemberIDs={setMemberIDs}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
