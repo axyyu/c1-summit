@@ -4,7 +4,7 @@
 
 from makePrediction import make_prediction
 from googleMaps import search_cuisineAll
-from felixfunctions import get_avg_spending_v2, final_area
+from felixfunctions import get_avg_spending_v2, final_area, point_inside_hull_v1
 from firebaseClient import FirebaseClient
 
 def get_cost(price):
@@ -27,10 +27,27 @@ def find_optimal_location(user_ids):
       for t in fb.db.collection('users').document(doc.id).collection('transactions').stream():
         tot_locs.append(t.to_dict()["coordinates"])
 
-  _, center, radius = final_area(tot_locs)
+  _, center, radius, hull = final_area(tot_locs)
 
   cost = get_cost(price)
 
-  return search_cuisineAll(cost, top_categories, center, radius)
+  return (search_cuisineAll(cost, top_categories, center, radius), hull)
 
-# places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
+places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
+
+within_convex_hull = []
+for shop in places[0]['places']:
+  coords = [ shop["latitude"], shop["longitude"] ]
+  if point_inside_hull_v1(coords, places[1]):
+    within_convex_hull.append(shop)
+
+#print(len(places[0]['places']))
+#print(len(within_convex_hull))
+  
+for entry in places[0]['places']:
+  print(str(entry["latitude"])+","+ str(entry['longitude']))
+
+print("-----")
+
+for entry in within_convex_hull:
+  print(str(entry["latitude"])+","+ str(entry['longitude']))

@@ -39,4 +39,5 @@ def search_cuisineAll(cost, cuisineList, midpt, radius):
                 "user_ratings_total": result["user_ratings_total"],
                 "cuisine": cuisine})
 
-    return json.dumps(placeList)
+    #return json.dumps(placeList)
+    return placeList

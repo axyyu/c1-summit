@@ -3,6 +3,7 @@ from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
 from Profile import *
 import math
+from matplotlib.path import Path
 
 from firebaseClient import FirebaseClient, credit_cards
 #def get_avg_spending_v1( , spending_arr):
@@ -61,7 +62,7 @@ def final_area(tot_trans):
     #file.write(str(hull[1][0]) + ","+str(hull[1][1]))
     #print("%f, %f and %f, %f has distance: %s" % (w,x,y,z,str(d)))
     #file.close()
-    return (hull[0], hull[1], d)
+    return (hull[0], hull[1], d, hull[2])
 
 def get_avg_spending_v2(arrayProfile):
     low_avg = arrayProfile[0]["averageSpending"]
@@ -178,7 +179,7 @@ def get_possible_location_v2(locations):
     cx = np.mean(hull.points[hull.vertices,0])
     cy = np.mean(hull.points[hull.vertices,1])
     
-    return (ret, [cx, cy])
+    return (ret, [cx, cy], hull)
 
 def get_possible_location_v3( locations_eaten):
     # likely will not implement
@@ -191,6 +192,6 @@ def get_possible_location_v3( locations_eaten):
 def point_inside_hull_v1(point, hull):
     if not isinstance(hull,ConvexHull):
         return False
-    
-    return hull.find_simplex(point) >= 0
+    hull_path = Path( hull.points[hull.vertices] )
+    return hull_path.contains_point((point[0],point[1]))
         
