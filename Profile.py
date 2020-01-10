@@ -1,10 +1,10 @@
 class Profile:
     def __init__(self):
-        favorites = {}
-        transactions = []
-        totalSpent = 0
-        averageSpending = 0
-        medianSpending = 0
-        categoryScores = []
-        xLocation = 0
-        yLocation = 0
+        self.favorites = {}
+        self.transactions = []
+        self.totalSpent = 0
+        self.averageSpending = 0
+        self.medianSpending = 0
+        self.category_scores = {}
+        self.xLocation = 0
+        self.yLocation = 0
