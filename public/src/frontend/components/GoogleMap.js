@@ -35,17 +35,19 @@ class GoogleMap extends React.Component {
         const mapStyle = {
             width: '40%',
             height: '40%'
-            
         };
 
+        const initialCenter = {lat: 47.444, lng: -122.176}
+
         return (
-            <div>
+            <div style={{textAlign:'right'}}>
                  <Map
                     google={this.props.google}
                     zoom={8}
                     style={mapStyle}
-                    initialCenter={{ lat: 47.444, lng: -122.176 }} //change default center to first suggested location 
+                    initialCenter={initialCenter} //change default center to first suggested location 
                 />
+                <Marker position={initialCenter}/>
                 {this.displayFriends()}
                 {this.displayRestaurant()}
             </div>

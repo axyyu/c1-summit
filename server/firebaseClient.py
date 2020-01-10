@@ -46,13 +46,11 @@ def randomTimeGenerator():
 class FirebaseClient():
 
   def __init__(self):
-    try {
+    try:
       cred = credentials.Certificate("./firebase.json")
       firebase_admin.initialize_app(cred)
-    }
-    except(err) {
+    except(err):
       print(err)
-    }
 
     self.db = firestore.client()
     self.faker = Faker()

@@ -2,25 +2,27 @@ import React from 'react'
 import GoogleMap from './components/GoogleMap'
 import Sort from './components/Sort'
 import Filter from './components/Filter'
+import Drop from './components/Drop'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
-// onClick = e => {
-//     let checkList = e.target;
-
-// }
 const drop = {
     textAlign: 'center',
-    display: 'inline-block'
+    display: 'inline-block',
 }
+
+const sort = ['Rating','Distance', 'Category', 'Price']
+const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 
 const MapPage = () => (
     <div style={drop}> 
-        <div><Sort /></div>
-        <div><Filter /></div>
-        <div style={{textAlign:'right'}}>
-            <GoogleMap />
-        </div>
+        <button style={{ float: 'right', width: '100px' }}>
+            &nbsp;&nbsp;&nbsp;&nbsp; Back
+            <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
+        </button>
+            <Drop title='Sort By' list={sort}/>
+            <Drop title='Filter' list={filter}/>
+            <GoogleMap style={{margin:'auto'}}/>
     </div>
 )
 
