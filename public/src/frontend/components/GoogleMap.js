@@ -52,11 +52,15 @@ class GoogleMap extends React.Component {
       <div style={{ textAlign: 'right' }}>
         <Map
           google={this.props.google}
-          zoom={8}
+          zoom={11}
           style={mapStyle}
           initialCenter={initialCenter} //change default center to first suggested location
         >
           <Marker key='tester' id='1' position={initialCenter} />
+          <Marker key='restaurant' id='2' position={{
+              lat: this.props.restaurants[0].location.latitude,
+              lon: this.props.restaurants[0].location.longitude  
+            }} />
           {this.displayFriends()}
           {this.displayRestaurant()}
         </Map>
