@@ -12,7 +12,7 @@ const Direction = ({ restaurant }) => {
     <div>
       <a href={link} target='_blank'>
         <button style={{ textAlign: 'center', width: '200px' }}>
-          Take me there!
+          Open in Google Maps
         </button>
       </a>
     </div>

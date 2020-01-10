@@ -125,7 +125,7 @@ def remove_location_outlier_v1(locations):
     interq_range_y = third_q_y - first_q_y
 
     # most extreme values allowed
-    val = 5
+    val = 10
     x_min = first_q_x - (val * interq_range_x)
     x_max = third_q_x + (val * interq_range_x)
     y_min = first_q_y - (val * interq_range_y)
