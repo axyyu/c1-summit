@@ -3,17 +3,17 @@ from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
 from Profile.py import *
 
-def get_avg_spending_v1(self, spending_arr):
-    # ex. spending_arr [[low1, high1], [low2, high2], [low3, high3]]
-    size = len(spending_arr)
-    low = 0.0
-    high = 0.0
-    for interval in spending_arr:
-        low = low + float(interval[0])
-        high = high + float(interval[1])
-    low = low / size
-    high = high / size
-    return [low, high]
+#def get_avg_spending_v1(self, spending_arr):
+#    # ex. spending_arr [[low1, high1], [low2, high2], [low3, high3]]
+#    size = len(spending_arr)
+#    low = 0.0
+#    high = 0.0
+#    for interval in spending_arr:
+#        low = low + float(interval[0])
+#        high = high + float(interval[1])
+#    low = low / size
+#    high = high / size
+#    return [low, high]
 
 def get_avg_spending_v2(self, arrayProfile):
     low_avg = arrayProfile[0].averageSpending
