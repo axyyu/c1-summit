@@ -19,10 +19,6 @@ const retreivingData = () => {
     })
 }
 
-/***
- * peopleArray = JSON.stringify({'people': ['Anna', 'ty']})
- * */
-
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])
