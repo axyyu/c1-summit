@@ -1,24 +1,32 @@
 import React from 'react'
 
-const Places = ({name, rating, price, address}) => {
-
-    const button = {
-        backgroudColor: '#CAD3C8',
-        borderColor: '#000000',
-    }
-
-    return(
-        <div>                        
-            <button className='button places'>
-                <div>
-                    <div>{name}</div>
-                    <div>{rating}</div>
-                    <div>{price}</div>
-                    <div>{address}</div>
-                </div>
-            </button>
-        </div>
-  )
+const placesStyle = {
+  padding: '0 10px',
+  border: '1px solid #CAD3C8',
+  boxSizing: 'border-box',
+  width: '95%',
+  float: 'left',
+  marginRight: '5%',
+  marginBottom: '20px'
 }
+
+const Places = ({ name, rating, address, price, numReviews }) => (
+  <div style={placesStyle}>
+    <div>
+      <b>
+        <p style={{ float: 'left' }}>{name}</p>
+      </b>
+      <p style={{ float: 'right' }}>
+        {numReviews} reviews {rating}
+      </p>
+    </div>
+    <div style={{ clear: 'both' }}>
+      <i>
+        <p style={{ float: 'left' }}>{address}</p>
+      </i>
+      <p style={{ float: 'right' }}>{price}</p>
+    </div>
+  </div>
+)
 
 export default Places

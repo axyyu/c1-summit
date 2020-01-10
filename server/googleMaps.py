@@ -24,16 +24,14 @@ def search_cuisineAll(json_body):
         res = json.loads(response.text)
 
         for result in res["results"]:
-            placeList["places"].append({'name': result["name"],
-                                        'formatted_address': result["formatted_address"],
-                                        'latitude': result["geometry"]["location"]["lat"],
-                                        'longitude': result["geometry"]["location"]["lng"],
-                                        'price_level': result.get("price_level", 0),
-                                        'rating': result["rating"],
-                                        'user_ratings_total': result["user_ratings_total"]})
-        print(json.dumps(placeList))
+            placeList["places"].append({"name": result["name"],
+                                        "formatted_address": result["formatted_address"],
+                                        "latitude": result["geometry"]["location"]["lat"],
+                                        "longitude": result["geometry"]["location"]["lng"],
+                                        "price_level": result.get("price_level", 0),
+                                        "rating": result["rating"],
+                                        "user_ratings_total": result["user_ratings_total"]})
         pagetoken = res.get("next_page_token", None)
-        print("here -->> ", pagetoken)
         return pagetoken, placeList
     lat = json_body.get("lat")
     lng = json_body.get("lng")
@@ -51,4 +49,4 @@ def search_cuisineAll(json_body):
         if not pagetoken:
             break
 
-    return placeList
+    return json.dumps(placeList)
