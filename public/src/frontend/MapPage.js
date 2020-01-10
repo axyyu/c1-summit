@@ -111,17 +111,17 @@ const MapPage = ({
               currLocation={currLocation}
             />
           </div>
+          <div>
+            <Direction
+              style={{
+                textAlign: 'center',
+                marginTop: '5000px',
+                position: 'absolute'
+              }}
+              restaurant={restaurant}
+            />
+          </div>
         </div>
-      </div>
-      <div>
-        <Direction
-          style={{
-            textAlign: 'center',
-            marginTop: '5000px',
-            position: 'absolute'
-          }}
-          restaurant={restaurant}
-        />
       </div>
     </div>
   )
