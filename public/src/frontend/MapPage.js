@@ -12,12 +12,17 @@ const drop = {
   marginTop: '30px'
 }
 
+const button = {
+    backgroudColor: '#CAD3C8',
+    borderColor: '#000000',
+}
+
 const sort = ['Rating', 'Distance', 'Category', 'Price']
 const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 //const [location, setLocation] = useState()
 
 const MapPage = () => {
-    const restaurants = [{name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', location:{latitude: 47.444, longitude: -122.176}}]
+    const restaurants = [{name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', location:{latitude: 47.444, longitude: -122.176}}, {name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', location:{latitude: 47.444, longitude: -122.176}}, {name:'sample store', rating:'4.5/5', address:'somewhere', price:'$$', location:{latitude: 47.444, longitude: -122.176}}]
     const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
     return (
      <div style={drop}> 
@@ -31,7 +36,7 @@ const MapPage = () => {
         <Drop title='Filter' list={filter}/>
         <div>
             {restaurants.map(restaurant => (
-                    <Places name={restaurant.name} rating={restaurant.rating} address={restaurant.address} price={restaurant.price}/>
+                    <Places style={button} name={restaurant.name} rating={restaurant.rating} address={restaurant.address} price={restaurant.price}/>
                 )
             )}
             <GoogleMap style={{margin:'auto'}} friends={friends} restaurants={restaurants}/>

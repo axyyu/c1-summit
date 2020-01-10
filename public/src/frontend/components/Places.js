@@ -2,14 +2,19 @@ import React from 'react'
 
 const Places = ({name, rating, price, address}) => {
 
+    const button = {
+        backgroudColor: '#CAD3C8',
+        borderColor: '#000000',
+    }
+
     return(
         <div>                        
-            <button>
+            <button className='button places'>
                 <div>
-                    {name}
-                    {rating}
-                    {price}
-                    {address}
+                    <div>{name}</div>
+                    <div>{rating}</div>
+                    <div>{price}</div>
+                    <div>{address}</div>
                 </div>
             </button>
         </div>
