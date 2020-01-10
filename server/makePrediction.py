@@ -26,7 +26,7 @@ def make_prediction(users):
 
   sorted_sums = sorted(sorted_sums, key = lambda x: x[1])
   sorted_sums.reverse()
-  NUM_TOP = 3
+  NUM_TOP = 10
   top_categories = [str(cuisine[0]) for cuisine in sorted_sums[:NUM_TOP]]
 
   return top_categories

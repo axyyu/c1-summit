@@ -5,7 +5,7 @@ const Places = ({ name, rating, address, price, numReviews, isSelected }) => {
     padding: '0 10px',
     border: '1px solid #CAD3C8',
     boxSizing: 'border-box',
-    width: '95%',
+    width: '480px',
     float: 'left',
     marginRight: '5%',
     marginBottom: '20px',
