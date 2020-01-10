@@ -38,7 +38,7 @@ const MapPage = ({
       rating: '4.5/5',
       address: '7937 Tysons Corner Center',
       price: '$',
-      location: { latitude: 47.444, longitude: -122.176 },
+      location: { latitude: 38.9175726, longitude: -77.2377628},
       numReviews: 500
     },
     {
