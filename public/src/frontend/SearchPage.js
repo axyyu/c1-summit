@@ -88,7 +88,7 @@ const SearchPage = () => {
           <p>Finding best location...</p>
         </div>
       ) : showMap ? (
-        <MapPage setShowMap={setShowMap} resultPlaces={results} />
+        <MapPage setShowMap={() => setShowMap()} resultPlaces={results} />
       ) : (
         <div style={{ margin: '30px 100px' }}>
           <button

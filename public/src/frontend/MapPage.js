@@ -41,13 +41,6 @@ const MapPage = ({
   console.log(results)
   const [restaurants, setRestaurants] = useState(results.places)
   const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
-<<<<<<< HEAD
-=======
-  const [list, setList] = useState(results) //all restaurants from initial search function
-  console.log(list)
-
-  const refine = () => {}
->>>>>>> 9bb0b2a0bc1f086db828733f561cf4a403c02716
 
   const distance = r => {
     let lon1 = currLocation.lng
@@ -146,24 +139,7 @@ const MapPage = ({
               position: 'absolute'
             }}
           >
-<<<<<<< HEAD
-            {restaurants.map(restaurant => (
-              <div onClick={() => {setSelectedRestaurant(restaurant)}}>
-                <Places
-                  name={restaurant.name}
-                  rating={restaurant.rating}
-                  address={restaurant.formatted_address}
-                  price={restaurant.price_level}
-                  numReviews={restaurant.user_ratings_total}
-                  isSelected={
-                    restaurant.name == selectedRestaurant.name ? true : false
-                  }
-                  cuisine={restaurant.cuisine}
-                />
-              </div>
-            ))}
-=======
-            {resultPlaces.map(restaurant => {
+            {restaurants.map(restaurant => {
               return (
                 <div onClick={() => setSelectedRestaurant(restaurant)}>
                   <Places
@@ -185,7 +161,6 @@ const MapPage = ({
                 </div>
               )
             })}
->>>>>>> 9bb0b2a0bc1f086db828733f561cf4a403c02716
           </div>
           <div
             className='resultMap'
