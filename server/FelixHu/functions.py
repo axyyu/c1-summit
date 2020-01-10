@@ -1,43 +1,35 @@
 from collections import Counter
 from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
-#import sys
-#sys.path.append('../')
+from Profile.py import *
+
 from ..firebaseClient import FirebaseClient, credit_cards
+#def get_avg_spending_v1(self, spending_arr):
+#    # ex. spending_arr [[low1, high1], [low2, high2], [low3, high3]]
+#    size = len(spending_arr)
+#    low = 0.0
+#    high = 0.0
+#    for interval in spending_arr:
+#        low = low + float(interval[0])
+#        high = high + float(interval[1])
+#    low = low / size
+#    high = high / size
+#    return [low, high]
 
-def get_avg_spending_v1(self, spending_arr):
-    # ex. spending_arr [[low1, high1], [low2, high2], [low3, high3]]
-    size = len(spending_arr)
-    low = 0.0
-    high = 0.0
-    for interval in spending_arr:
-        low = low + float(interval[0])
-        high = high + float(interval[1])
-    low = low / size
-    high = high / size
-    return [low, high]
-
-def get_avg_spending_v2(self, spending_arr):
-    # get customers with lowest and highest spending averages
-    lowest_ind = 0
-    highest_ind = 0
-    low_avg = float(spending_arr[0][0]+spending_arr[0][1])/2.0
-    high_avg = float(spending_arr[0][0]+spending_arr[0][1])/2.0
-    for i in range(1, len(spending_arr)):
-        avg = float(spending_arr[i][0]+spending_arr[i][1])/2.0
-        if avg < low_avg:
-            low_avg = avg
-            lowest_ind = i
-        if avg > high_avg:
-            high_avg = avg
-            highest_ind = i
+def get_avg_spending_v2(self, arrayProfile):
+    low_avg = arrayProfile[0].averageSpending
+    high_avg = arrayProfile[0].averageSpending
+    for profile in arrayProfile:
+        if profile.averageSpending < low_avg:
+            low_avg = profile.averageSpending
+        if profile.averageSpending > high_avg:
+            high_avg = profile.averageSpending
 
     # apply a sigmoid/exponential/some nonlinear function to find avg between the highest and lowest spenders
     # y = 1/(1+e^(-0.04x))
-
     diff = abs(high_avg - low_avg)
     proportion = 1-(1/(1+e**(-0.04*diff)))
-    final = diff * proportion + low_avg
+    final = (diff * proportion) + low_avg
     return final
 
 def get_popular_cuisine_v1(self, cuisine_pref, top):
