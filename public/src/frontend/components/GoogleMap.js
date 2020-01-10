@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.js'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
@@ -33,10 +33,11 @@ class GoogleMap extends React.Component {
 
     render() {
         const mapStyle = {
-            width: '40%',
-            height: '40%'
+            width: '50%',
+            height: '50%'
         };
 
+        const [location, setLocation] = useState(this.state.restaurant[0].location);
         const initialCenter = {lat: 47.444, lng: -122.176}
 
         return (
@@ -46,10 +47,15 @@ class GoogleMap extends React.Component {
                     zoom={8}
                     style={mapStyle}
                     initialCenter={initialCenter} //change default center to first suggested location 
-                />
-                <Marker position={initialCenter}/>
+                >
+                <Marker 
+                    key='tester' 
+                    id= '1' 
+                    position={location}
+                    />
                 {this.displayFriends()}
                 {this.displayRestaurant()}
+                </Map>
             </div>
         );
     }
