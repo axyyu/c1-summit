@@ -10,8 +10,6 @@ const Places = ({ name, rating, price, address }) => {
           {price}
           {address}
         </div>
-      </button>
-    </div>
   )
 }
 

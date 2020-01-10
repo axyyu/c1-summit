@@ -23,7 +23,7 @@ const MapPage = () => {
       rating: '4.5/5',
       address: 'somewhere',
       price: '$$',
-      location: { lat: 47.444, lng: -122.176 }
+      location: { latitude: 47.444, longitude: -122.176 }
     }
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
