@@ -19,12 +19,14 @@ const Drop = ({title, list}) => {
         display: 'block',
         marginLeft: '20px',
         marginRight: '20px',
+        float: 'top'
     }
 
     const checkbox = {
         padding: '5px',
         textAlign: 'left',
-        marginLeft: '13px'
+        marginLeft: '13px',
+        float: 'top'
     }
 
     return(

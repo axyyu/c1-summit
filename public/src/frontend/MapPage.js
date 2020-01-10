@@ -40,9 +40,9 @@ const MapPage = () => {
             <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
           </button>
         </a>
-        <Drop title='Sort By' list={sort} />
-        <Drop title='Filter' list={filter} />
-        <div>
+        <div style={{display:'inline-block', marginLeft: '30px',position:'absolute'}}><Drop style={{float:'top'}} title='Sort By' list={sort} /></div>
+        <div style={{display:'inline-block', marginLeft: '170px', position:'absolute'}}><Drop style={{float:'top'}} title='Filter' list={filter} /></div>
+        <div style={{marginRop:'40px'}}>
           {restaurants.map(restaurant => (
             <Places
               name={restaurant.name}
