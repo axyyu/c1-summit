@@ -27,8 +27,9 @@ def create_person(transactions_list):
             else:
                 category_scores[tag] = 1
     prices.sort()
-    # newProfile.medianSpending = statistics.median(prices)
+    newProfile.medianSpending = statistics.median(prices)
     avgspend = newProfile.totalSpent/len(newProfile.transactions)
+    newProfile.averageSpending = avgspend
     newProfile.favorites = list(reversed([x for x in sorted(newProfile.favorites.items(), key=lambda kv: kv[1])]))
     newProfile.category_scores = category_scores
     return newProfile

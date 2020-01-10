@@ -54,4 +54,4 @@ def user_profiles():
     ref.update(payload)
 
 
-user_profiles()
+# user_profiles()

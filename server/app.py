@@ -1,10 +1,10 @@
 from flask import Flask, jsonify
 from generate_data import generate_data
 from firebaseClient import FirebaseClient
+from optimalLocation import find_optimal_location
 
 app = Flask(__name__)
 fb = FirebaseClient()
-
 
 @app.route('/')
 def hello_world():
@@ -37,4 +37,5 @@ def get_user_by_id(id):
 
 @app.route('/api/location', methods=['POST'])
 def get_location():
-  pass
+  user_ids = request.json["user_ids"]
+  return jsonify(find_optimal_location(user_ids))

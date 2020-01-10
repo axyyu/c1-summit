@@ -2,6 +2,7 @@ from collections import Counter
 from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
 from Profile import *
+import math
 
 from firebaseClient import FirebaseClient, credit_cards
 #def get_avg_spending_v1( , spending_arr):
@@ -16,19 +17,65 @@ from firebaseClient import FirebaseClient, credit_cards
 #    high = high / size
 #    return [low, high]
 
+# Law of Haversine???
+def measure(lat1, lon1, lat2, lon2):  # generally used geo measurement function
+    R = 6378.137; # Radius of earth in KM 
+    dLat = lat2 * math.pi / 180.0 - lat1 * math.pi / 180.0
+    dLon = lon2 * math.pi / 180.0 - lon1 * math.pi / 180.0
+    a = math.sin(dLat/2.0) * math.sin(dLat/2.0) + math.cos(lat1 * math.pi / 180.0) * math.cos(lat2 * math.pi / 180.0) * math.sin(dLon/2.0) * math.sin(dLon/2.0)
+    c = 2.0 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    d = R * c
+    return d * 1000.0; # meters
+
+def get_coords_from_trans(tot_trans):
+    # tot_trans: [[a,b], [c,d], ...]
+    coords = []
+    #file = open("testfile1.txt","w") 
+    for entry in tot_trans:
+        coords.append(entry['coordinates'])
+        #file.write(str(entry['coordinates'][0]) + ","+str(entry['coordinates'][1])+"\n")
+
+    #file.close()
+    # print(coords)
+    return coords
+
+def final_area(tot_trans):
+    coords = tot_trans
+    hull = get_possible_location_v2(coords)
+
+    #file = open("testfile2.txt","w") 
+    longest_dist = 0.0
+    w = -1
+    x = -1
+    y = -1
+    z = -1
+    for entry in hull[0]:
+        #file.write(str(entry[0]) + ","+str(entry[1])+"\n")
+        d = measure(hull[1][0], hull[1][1], entry[0], entry[1]) 
+        if d > longest_dist:
+            longest_dist = d
+            w = hull[1][0]
+            x = hull[1][1]
+            y = entry[0]
+            z = entry[1]
+    #file.write(str(hull[1][0]) + ","+str(hull[1][1]))
+    #print("%f, %f and %f, %f has distance: %s" % (w,x,y,z,str(d)))
+    #file.close()
+    return (hull[0], hull[1], d)
+
 def get_avg_spending_v2(arrayProfile):
-    low_avg = arrayProfile[0].averageSpending
-    high_avg = arrayProfile[0].averageSpending
+    low_avg = arrayProfile[0]["averageSpending"]
+    high_avg = arrayProfile[0]["averageSpending"]
     for profile in arrayProfile:
-        if profile.averageSpending < low_avg:
-            low_avg = profile.averageSpending
-        if profile.averageSpending > high_avg:
-            high_avg = profile.averageSpending
+        if profile["averageSpending"] < low_avg:
+            low_avg = profile["averageSpending"]
+        if profile["averageSpending"] > high_avg:
+            high_avg = profile["averageSpending"]
 
     # apply a sigmoid/exponential/some nonlinear function to find avg between the highest and lowest spenders
     # y = 1/(1+e^(-0.04x))
     diff = abs(high_avg - low_avg)
-    proportion = 1-(1/(1+e**(-0.04*diff)))
+    proportion = 1-(1/(1+math.e**(-0.04*diff)))
     final = (diff * proportion) + low_avg
     return final
 
@@ -59,7 +106,7 @@ def remove_location_outlier_v1(locations):
     interq_range_y = third_q_y - first_q_y
 
     # most extreme values allowed
-    val = 15
+    val = 5
     x_min = first_q_x - (val * interq_range_x)
     x_max = third_q_x + (val * interq_range_x)
     y_min = first_q_y - (val * interq_range_y)
@@ -71,15 +118,19 @@ def remove_location_outlier_v1(locations):
     locations_filtered = []
     for entry in locations:
         # print(locations[i][0])
-        x = abs(entry[0])
-        y = abs(entry[1])
+        x = entry[0]
+        y = entry[1]
+        
+        interval_x = [min(x_max, x_min), max(x_max, x_min)]
+        interval_y = [min(y_max, y_min), max(y_max, y_min)]
     # locations = [x for x in locations if not determine(x, x_max, x_min, y_max, y_min)]
-        if x < abs(x_max) and x > abs(x_min) and y < abs(y_max) and y > abs(y_min):
+        if x >= interval_x[0] and x <= interval_x[1] and y >= interval_y[0] and y <= interval_y[1]:
             if entry not in locations_filtered:
                 locations_filtered.append(entry)
         #     i = max(0, i - 1)
     #print(len(locations))
     #print("locations size is 2) "+str(len(locations_filtered)))
+    #print(locations_filtered)
     #print(locations_filtered)
     return locations_filtered
 
@@ -111,7 +162,7 @@ def get_possible_location_v2(locations):
     # return a convex hull of area to search for food
     
     locations = remove_location_outlier_v1(locations)
-
+    #print(locations)
     # can't make convex hull with 2 or less points
     if len(locations) < 3:
         return []
