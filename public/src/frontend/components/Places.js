@@ -28,7 +28,7 @@ const Places = ({
           <p style={{ float: 'left' }}>{name}</p>
         </b>
         <p style={{ float: 'right' }}>
-          {numReviews} reviews {rating}
+          {numReviews} Reviews: {rating} stars
         </p>
       </div>
       <div style={{ clear: 'both' }}>

@@ -80,7 +80,13 @@ const SearchPage = () => {
   return (
     <div>
       {loadingMap ? (
-        <div>Loading</div>
+        <div className='loader-wrapper'>
+          <div className='lds-ripple'>
+            <div></div>
+            <div></div>
+          </div>
+          <p>Finding best location...</p>
+        </div>
       ) : showMap ? (
         <MapPage setShowMap={setShowMap} resultPlaces={results} />
       ) : (
