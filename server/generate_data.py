@@ -1,5 +1,6 @@
 from firebaseClient import FirebaseClient, credit_cards
 from DataGeneration import YelpClient 
+from createNewProfile import create_person
 import random
 
 def generate_sample_user(fb, yc, price):
@@ -19,6 +20,8 @@ def generate_data():
     generate_sample_user(fb,yc, price)
     price+=5
 
+  user_profiles()
+
 def update_users():
   fb = FirebaseClient()
   for user in fb.db.collection('users').get():
@@ -27,4 +30,28 @@ def update_users():
     ref = fb.user_ref(user.id)
     ref.update({'card': card, 'points': points})
 
-# generate_data()
+def user_profiles():
+  fb = FirebaseClient()
+  for user in fb.db.collection('users').stream():
+    print(user.id)
+    transactions = []
+    for t in fb.user_ref(user.id).collection('transactions').stream():
+      transactions.append(t.to_dict())
+
+    person = create_person(transactions)
+
+    ref = fb.user_ref(user.id)
+
+    payload = {
+      'favorites': person.favorites, 
+      'totalSpent': person.totalSpent,
+      'averageSpending': person.averageSpending,
+      'medianSpending': person.medianSpending,
+      'category_scores': person.category_scores
+    }
+
+    print(payload)
+    ref.update(payload)
+
+
+user_profiles()
