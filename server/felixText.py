@@ -1,19 +1,28 @@
-from server.FelixHu.functions import *
-from server.firebaseClient import FirebaseClient
+from functions import *
+from firebaseClient import FirebaseClient
 import math
 
 def main():
     fb = FirebaseClient()
     
     tot_trans = []
+    tot_trans_2 = []
     db = fb.db
     temp = db.collection('users').stream()
     for doc in temp:
         trans = db.collection('users').document(doc.id).collection('transactions').stream()
+        tot_trans_2.append(doc.to_dict())
         for x in trans:
             tot_trans.append(x.to_dict())
     # print(tot_trans[0])
+    stuff2(tot_trans_2)
+    
+def stuff2(tot_trans):
+    #print(tot_trans)
+    ret = get_avg_spending_v2(tot_trans)
+    print(ret)
 
+def stuff1(tot_trans):
     coords = get_coords_from_trans(tot_trans)
 
     hull = get_possible_location_v2(coords)

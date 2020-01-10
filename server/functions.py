@@ -3,7 +3,7 @@ from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
 from Profile import *
 
-from ..firebaseClient import FirebaseClient, credit_cards
+from firebaseClient import FirebaseClient, credit_cards
 #def get_avg_spending_v1( , spending_arr):
 #    # ex. spending_arr [[low1, high1], [low2, high2], [low3, high3]]
 #    size = len(spending_arr)
