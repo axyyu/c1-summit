@@ -4,6 +4,7 @@ import FriendCard from "./components/FriendCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import MapPage from "./MapPage";
+import "./index.css";
 
 const tagStyle = {
   padding: "5px 0"
@@ -80,7 +81,13 @@ const SearchPage = () => {
   return (
     <div>
       {loadingMap ? (
-        <div>Loading</div>
+        <div className="loader-wrapper">
+          <div className="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+          <p>Finding best location...</p>
+        </div>
       ) : showMap ? (
         <MapPage setShowMap={setShowMap} resultPlaces={results} />
       ) : (
