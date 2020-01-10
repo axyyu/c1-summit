@@ -32,6 +32,9 @@ def find_optimal_location(user_ids):
 
   _, center, radius, hull = final_area(trans)
 
+  if not hull:
+    return []
+
   cost = get_cost(price)
 
   pl = (search_cuisineAll(cost, recommendations, center, radius), hull)

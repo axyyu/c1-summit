@@ -186,8 +186,12 @@ const onChange = field => {
                       restaurant.name == selectedRestaurant.name ? true : false
                     }
                     isRewards={
+                      restaurant.rating < 4.3 && restaurant.rating > 3.5 &&
+                      restaurant.user_ratings_total > 600
+                    }
+                    isEfficient={
                       restaurant.rating > 4.4 &&
-                      restaurant.user_ratings_total > 1050
+                      restaurant.user_ratings_total > 1000
                     }
                     rewardsPercent={Math.sqrt(restaurant.rating)}
                     cuisine={restaurant.cuisine}

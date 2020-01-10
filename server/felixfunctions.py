@@ -52,6 +52,9 @@ def final_area(tot_trans):
     y = -1
     z = -1
     #print(hull)
+    if not hull:
+        return ([], [38.909, -77.031], 1000, NULL)
+
     for entry in hull[0]:
         #file.write(str(entry[0]) + ","+str(entry[1])+"\n")
         d = measure(hull[1][0], hull[1][1], entry[0], entry[1]) 
@@ -64,6 +67,7 @@ def final_area(tot_trans):
     #file.write(str(hull[1][0]) + ","+str(hull[1][1]))
     #print("%f, %f and %f, %f has distance: %s" % (w,x,y,z,str(d)))
     #file.close()
+    # ret, centroid, ConvexHull
     return (hull[0], hull[1], d, hull[2])
 
 def int_to_dollars(i):
@@ -125,7 +129,7 @@ def remove_location_outlier_v1(locations):
     interq_range_y = third_q_y - first_q_y
 
     # most extreme values allowed
-    val = 10
+    val = 20
     x_min = first_q_x - (val * interq_range_x)
     x_max = third_q_x + (val * interq_range_x)
     y_min = first_q_y - (val * interq_range_y)
