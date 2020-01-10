@@ -42,9 +42,6 @@ const MapPage = ({
   console.log(results)
   const [restaurants, setRestaurants] = useState(results.places)
   const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
-  const [list, setList] = useState(results) //all restaurants from initial search function
-  console.log(list)
-
 
   const refine = () => {
 
@@ -132,6 +129,7 @@ const MapPage = ({
               <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
                 Filter: <Filter />
               </div>
+              {/* <div style={{display:'inline-block', marginLeft:'20px', verticalAlign:'bottom'}}></div><button onClick={() => this.forceUpdate()}>Submit</button> */}
             </div>
           </div>
           <div
@@ -142,7 +140,7 @@ const MapPage = ({
             }}
           >
             {restaurants.map(restaurant => (
-              <div onClick={() => setSelectedRestaurant(restaurant)}>
+              <div onClick={() => {setSelectedRestaurant(restaurant)}}>
                 <Places
                   name={restaurant.name}
                   rating={restaurant.rating}
