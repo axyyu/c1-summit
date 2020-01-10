@@ -14,7 +14,7 @@ import { geolocated } from 'react-geolocated'
 
 const drop = {
   display: 'inline-block',
-  marginLeft: '30px',
+  marginLeft: '30px'
 }
 
 const button = {
@@ -61,12 +61,25 @@ const MapPage = ({
 
   return (
     <div>
-      <div >
-        <div style={{marginLeft:'30px', marginTop:'30px'}} className='resultListView'>
-          <div style={drop} className='resultHeader' style={{ marginBottom: '20px', display:'inline-block' }}>
+      <div>
+        <div
+          style={{ marginLeft: '30px', marginTop: '30px' }}
+          className='resultListView'
+        >
+          <div
+            style={drop}
+            className='resultHeader'
+            style={{ marginBottom: '20px', display: 'inline-block' }}
+          >
             {' '}
             <a href='/'>
-              <button style={{ width: '100px', marginRight:'70px', marginBottom:'20px'}}>
+              <button
+                style={{
+                  width: '100px',
+                  marginRight: '70px',
+                  marginBottom: '20px'
+                }}
+              >
                 &nbsp;&nbsp;&nbsp;&nbsp; Back
                 <FontAwesomeIcon
                   icon={faChevronLeft}
@@ -74,12 +87,22 @@ const MapPage = ({
                 />
               </button>
             </a>
-            <div style={{display:'inline-block'}}>
-                <div style={{display:'inline-block'}}>Sort: <Sort /></div>
-                <div style={{display:'inline-block', verticalAlign:'bottom'}}>Filter: <Filter /></div>
+            <div style={{ display: 'inline-block' }}>
+              <div style={{ display: 'inline-block' }}>
+                Sort: <Sort />
+              </div>
+              <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
+                Filter: <Filter />
+              </div>
             </div>
           </div>
-          <div style={{ marginTop: '40px', display:'block', position:'absolute' }}>
+          <div
+            style={{
+              marginTop: '40px',
+              display: 'block',
+              position: 'absolute'
+            }}
+          >
             {restaurants.map(restaurant => (
               <div onClick={() => setSelectedRestaurant(restaurant)}>
                 <Places
@@ -97,24 +120,37 @@ const MapPage = ({
           </div>
           <div
             className='resultMap'
-            style={{ marginLeft: '500px', textAlign: 'center', display: 'block', marginTop:'40px'}}
+            style={{
+              marginLeft: '500px',
+              textAlign: 'center',
+              display: 'block',
+              marginTop: '40px'
+            }}
           >
             <GoogleMap
-              style={{ margin: 'auto', position:'relative'}}
+              style={{ margin: 'auto', position: 'relative' }}
               friends={friends}
               restaurants={restaurants}
               selectedRestaurant={selectedRestaurant}
               currLocation={currLocation}
             />
-            <div style={{display:'block', verticalAlign:'bottom', marginLeft:'200px', marginTop:'400px', position:'absolute'}}>
-            <Direction
+            <div
               style={{
-                textAlign: 'center',
-                verticalAlign:'bottom'
+                display: 'block',
+                verticalAlign: 'bottom',
+                marginLeft: '200px',
+                marginTop: '400px',
+                position: 'absolute'
               }}
-              restaurant={selectedRestaurant}
-            />
-          </div>
+            >
+              <Direction
+                style={{
+                  textAlign: 'center',
+                  verticalAlign: 'bottom'
+                }}
+                restaurant={selectedRestaurant}
+              />
+            </div>
           </div>
         </div>
       </div>
