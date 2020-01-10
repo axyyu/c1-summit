@@ -11,12 +11,22 @@ const friendCardStyle = {
   textAlign: 'center'
 }
 
-const FriendCard = ({ name, members, setMembers }) => (
+const FriendCard = ({
+  name,
+  id,
+  members,
+  setMembers,
+  memberIDs,
+  setMemberIDs
+}) => (
   <div style={friendCardStyle}>
     <p>{name}</p>
     <button
       style={{ backgroundColor: '#58B19F', marginBottom: '15px' }}
-      onClick={() => setMembers([...members, name])}
+      onClick={() => {
+        setMembers([...members, name])
+        setMemberIDs([...memberIDs, id])
+      }}
     >
       Add to Group
     </button>
