@@ -42,7 +42,7 @@ def find_optimal_location(user_ids):
     coords = [ shop["latitude"], shop["longitude"] ]
     if point_inside_hull_v1(coords, pl[1]):
       within_convex_hull.append(shop)
-  print(within_convex_hull)
+  #print(within_convex_hull)
   return within_convex_hull
 
 # places = find_optimal_location(["4Y6QaMGYMreONwXVM04t", "4tFUneEDRGBBEUsxxKLR"])
