@@ -27,4 +27,4 @@ def update_users():
     ref = fb.user_ref(user.id)
     ref.update({'card': card, 'points': points})
 
-generate_data()
+# generate_data()
