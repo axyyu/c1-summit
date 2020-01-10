@@ -38,7 +38,7 @@ const MapPage = ({
       rating: '4.5/5',
       address: '7937 Tysons Corner Center',
       price: '$',
-      location: { latitude: 38.9175726, longitude: -77.2377628},
+      location: { latitude: 38.9175726, longitude: -77.2377628 },
       numReviews: 500
     },
     {
@@ -51,7 +51,9 @@ const MapPage = ({
     }
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
-  const [restaurant, setRestaurant] = useState(restaurants[0])
+  const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
+
+  console.log(selectedRestaurant.name)
 
   return (
     <div>
@@ -87,19 +89,22 @@ const MapPage = ({
               <Drop style={{ float: 'top' }} title='Filter' list={filter} />
             </div>
           </div>
-          <div style={{ marginRop: '40px' }}>
+          <div style={{ marginTop: '40px' }}>
             {restaurants.map(restaurant => (
-              <Places
-                name={restaurant.name}
-                rating={restaurant.rating}
-                address={restaurant.address}
-                price={restaurant.price}
-                onClick={() => setRestaurant(restaurant)}
-                numReviews={restaurant.numReviews}
-              />
+              <div onClick={() => setSelectedRestaurant(restaurant)}>
+                <Places
+                  name={restaurant.name}
+                  rating={restaurant.rating}
+                  address={restaurant.address}
+                  price={restaurant.price}
+                  numReviews={restaurant.numReviews}
+                  isSelected={
+                    restaurant.name == selectedRestaurant.name ? true : false
+                  }
+                />
+              </div>
             ))}
           </div>
-
           <div
             className='resultMap'
             style={{ marginLeft: '500px', textAlign: 'center' }}
@@ -108,6 +113,7 @@ const MapPage = ({
               style={{ margin: 'auto' }}
               friends={friends}
               restaurants={restaurants}
+              selectedRestaurant={selectedRestaurant}
               currLocation={currLocation}
             />
           </div>
@@ -118,7 +124,7 @@ const MapPage = ({
                 marginTop: '5000px',
                 position: 'absolute'
               }}
-              restaurant={restaurant}
+              restaurant={selectedRestaurant}
             />
           </div>
         </div>
