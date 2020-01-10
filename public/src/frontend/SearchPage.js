@@ -38,11 +38,13 @@ const SearchPage = () => {
       }
     })
       .then(res => {
+        console.log(res)
         return res.json()
       })
       .then(content => {
+        console.log(content)
         const jsonData = JSON.parse(content)
-        console.log(jsonData.places)
+
         setResults(jsonData.places)
         setLoadingMap(false)
       })
