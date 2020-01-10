@@ -10,13 +10,15 @@ const placesStyle = {
   marginBottom: '20px'
 }
 
-const Places = ({ name, rating, address, price }) => (
+const Places = ({ name, rating, address, price, numReviews }) => (
   <div style={placesStyle}>
     <div>
       <b>
         <p style={{ float: 'left' }}>{name}</p>
       </b>
-      <p style={{ float: 'right' }}>{rating}</p>
+      <p style={{ float: 'right' }}>
+        {numReviews} reviews {rating}
+      </p>
     </div>
     <div style={{ clear: 'both' }}>
       <i>
