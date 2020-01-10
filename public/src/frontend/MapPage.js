@@ -34,7 +34,7 @@ const MapPage = ({
 }) => {
   const currLocation =
     !isGeolocationAvailable || !isGeolocationEnabled || !coords
-      ? { lat: 47.444, lng: -122.176 }
+      ? { lat: 38.9188781, lng: -77.2221362 }
       : { lat: coords.latitude, lng: coords.longitude }
   const restaurants = [
     {
@@ -116,7 +116,6 @@ const MapPage = ({
             />
           </div>
           </div>
-          
         </div>
       </div>
     </div>
