@@ -38,7 +38,7 @@ const Places = ({
         <p style={{ float: 'right' }}>{price}</p>
       </div>
       <i>
-        <p style={{ clear: 'both', color: '#CAD3C8' }}>
+        <p style={{ clear: 'both', color: '#2d3436' }}>
           {isRewards &&
             'Earn ' +
               (Math.round(rewardsPercent * 100) / 100).toFixed(2) +
