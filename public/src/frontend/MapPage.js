@@ -7,7 +7,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const drop = {
   display: 'inline-block',
-  marginLeft: '100px',
+  marginLeft: '30px',
   marginTop: '30px'
 }
 
@@ -18,10 +18,17 @@ const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 const MapPage = () => {
   const restaurants = [
     {
-      name: 'sample store',
+      name: "McDonald's",
       rating: '4.5/5',
-      address: 'somewhere',
-      price: '$$',
+      address: '7937 Tysons Corner Center',
+      price: '$',
+      location: { latitude: 47.444, longitude: -122.176 }
+    },
+    {
+      name: 'Chick-Fil-A',
+      rating: '4/5',
+      address: '8461 Leesburg Pike Ste B',
+      price: '$',
       location: { latitude: 47.444, longitude: -122.176 }
     }
   ]
