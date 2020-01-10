@@ -37,7 +37,6 @@ const MapPage = () => {
             <GoogleMap style={{margin:'auto'}} friends={friends} restaurants={restaurants}/>
         </div>
       </div>
-    </div>
   )
 }
 

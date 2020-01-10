@@ -3,8 +3,6 @@ import './App.js'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 
 class GoogleMap extends React.Component {
-  constructor(props) {
-    super(props)
 
     constructor(props) {
         super(props);
