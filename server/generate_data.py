@@ -22,6 +22,6 @@ def update_users():
   fb = FirebaseClient()
   for user in fb.db.collection('users').get():
     card = random.choice(credit_cards)
-    points = random.randint(1000, 8000)
+    points = random.randint(100, 8000)
     ref = fb.user_ref(user.id)
     ref.update({'card': card, 'points': points})
