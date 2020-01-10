@@ -6,7 +6,7 @@ const Direction = ({restaurant}) => {
 
     return (
         <div>
-            <a href={link}>
+            <a href={link} target='_blank'>
                 <button style={{textAlign:'center'}}>Take me there!</button>
             </a>
         </div>
