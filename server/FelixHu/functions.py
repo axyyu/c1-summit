@@ -1,7 +1,7 @@
 from collections import Counter
 from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import numpy as np
-from Profile.py import *
+from Profile import *
 
 from ..firebaseClient import FirebaseClient, credit_cards
 #def get_avg_spending_v1(self, spending_arr):
