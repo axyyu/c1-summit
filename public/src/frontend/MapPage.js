@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import GoogleMap from './components/GoogleMap'
 import Drop from './components/Drop'
 import Places from './components/Places'
+import Direction from './components/Direction'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { geolocated } from 'react-geolocated'
@@ -50,7 +51,10 @@ const MapPage = ({
     }
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
+  const [restaurant, setRestaurant] = useState(restaurants[0]);
+
   return (
+    <div>
     <div style={drop}>
       <div className='resultListView'>
         <div className='resultHeader' style={{ marginBottom: '20px' }}>
@@ -87,13 +91,14 @@ const MapPage = ({
               rating={restaurant.rating}
               address={restaurant.address}
               price={restaurant.price}
+              onClick={() => setRestaurant(restaurant)}
               numReviews={restaurant.numReviews}
             />
           ))}
         </div>
 
-        <div className='resultMap' style={{ marginLeft: '500px' }}>
-          <GoogleMap
+        <div className='resultMap' style={{ marginLeft: '500px', textAlign:'center' }}>
+            <GoogleMap
             style={{ margin: 'auto' }}
             friends={friends}
             restaurants={restaurants}
@@ -101,6 +106,8 @@ const MapPage = ({
           />
         </div>
       </div>
+    </div>
+    <div><Direction style={{textAlign:'center', marginTop:'5000px', position:'absolute'}} restaurant={restaurant}/></div>
     </div>
   )
 }

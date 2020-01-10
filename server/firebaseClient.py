@@ -49,7 +49,7 @@ class FirebaseClient():
     try:
       cred = credentials.Certificate("./firebase.json")
       firebase_admin.initialize_app(cred)
-    except(err):
+    except Exception as err:
       print(err)
 
     self.db = firestore.client()
@@ -85,13 +85,13 @@ class FirebaseClient():
   def transaction_ref(self,user_id, transaction_id):
     return self.db.collection('users').document(user_id).collection('transactions')
 
-  def generate_transactions(self,user_id, res_list, price_min, price_max, num_to_add=156):
+  def generate_transactions(self,user_id, res_list, price_min, price_max, num_to_add=1000):
     for n in range(num_to_add):
       place = random.choice(res_list)
       time = randomTimeGenerator()
       date = randomDateGenerator()
       amount = random.randrange(price_min, price_max)
-      self.add_transaction(user_id, place.name, place.address, place.coordinates, amount, time, date, place.categories)
+      self.add_transaction(user_id, place["name"], place["address"], place["coordinates"], amount, time, date, place["categories"])
 
   def add_transaction(self,user_id, name, location, coordinates, amount, time, date, category):
     transaction = {
