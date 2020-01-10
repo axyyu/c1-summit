@@ -12,9 +12,11 @@ from firebase_admin import credentials, firestore
 import firebase_admin
 import random
 import math
+import datetime
+import statistics
 
 
-FACTORS = 5
+FACTORS = 3
 
 tot_trans = []
 trans_by_user = []
@@ -26,6 +28,7 @@ temp = db.collection('users').stream()
 for doc in temp:
 	temp_user = []
 	trans = db.collection('users').document(doc.id).collection('transactions').stream()
+	avgSpend = statistics.mean([x.to_dict()['averageSpending'] for x in db.collection('users').stream()])
 	for x in trans:
 		tot_trans.append(x.to_dict())
 		temp_user.append(x.to_dict())
@@ -60,59 +63,69 @@ for k,v in tot_category_sum.items():
 
 sorted_sums = sorted(sorted_sums, key = lambda x: x[1])
 sorted_sums.reverse()
-NUM_TOP = 15
+NUM_TOP = 10
 top_categories = [str(cuisine[0]) for cuisine in sorted_sums[:NUM_TOP + 1]]
 print(top_categories)
 
 
 
-# # raw = firebase json data
-# for transaction in tot_trans:
-# 	for tag in transaction[u'category']:
-# 		if tag not in top_categories:
-# 			continue
-# 		cuisines.append(tag)
-# 		time_of_day.append(int(str(transaction[u'time'])[:2]))
-# 		time_of_year.append(int(str(transaction[u'date'])[:2]))
-# 		price_point.append(int(str(transaction[u'amount'])))
-# 		lat_.append(float(str(transaction[u'coordinates'][0])))
-# 		long_.append(float(str(transaction[u'coordinates'][1])))
-# for i in range(len(cuisines)):
-# 	cuisines[i] = top_categories.index(cuisines[i])
+# raw = firebase json data
+for transaction in tot_trans:
+	for tag in transaction[u'category']:
+		if tag not in top_categories:
+			continue
+		cuisines.append(tag)
+		time_of_day.append(int(str(transaction[u'time'])[:2]))
+		time_of_year.append(int(str(transaction[u'date'])[:2]))
+		price_point.append(int(str(transaction[u'amount'])))
+		lat_.append(float(str(transaction[u'coordinates'][0])))
+		long_.append(float(str(transaction[u'coordinates'][1])))
+for i in range(len(cuisines)):
+	cuisines[i] = top_categories.index(cuisines[i])
 
 
-# train_data = np.zeros((len(tot_trans), FACTORS))
-# train_labels = np.zeros((len(tot_trans), 1))
+train_data = np.zeros((len(cuisines), FACTORS))
+train_labels = np.zeros((len(cuisines), 1))
 
 
-# for i in range(len(cuisines)):
-# 	train_data[i] = np.array([time_of_day[i], time_of_year[i], price_point[i], lat_[i], long_[i]])
-# 	train_labels[i] = cuisines[i]
+for i in range(len(cuisines)):
+	train_data[i] = np.array([time_of_day[i], time_of_year[i], price_point[i]])
+	train_labels[i] = cuisines[i]
 
-# def build_model(train_data):
-# 	model = keras.Sequential([
-# 		keras.layers.Dense(64, activation=tf.nn.relu, input_shape=(train_data.shape[1],)),
-# 		keras.layers.Dense(len(unique_tags), activation=tf.nn.relu),
-# 		keras.layers.Dense(1)
-# 	])
+def build_model(train_data):
+	model = keras.Sequential([
+		keras.layers.Dense(len(top_categories), activation=tf.nn.relu, input_shape=(train_data.shape[1],)),
+		keras.layers.Dense(128, activation=tf.nn.relu),
+		keras.layers.Dense(1)
+	])
 
-# 	# optimizes our model
-# 	optimizer = tf.train.RMSPropOptimizer(0.001)
-# 	model.compile(loss='mse', optimizer=optimizer, metrics=['mae'])
-# 	return model
+	# optimizes our model
+	optimizer = tf.train.RMSPropOptimizer(0.001)
+	model.compile(loss='mse', optimizer=optimizer, metrics=['mae'])
+	return model
 
-# def train(data):
-# 	model = build_model(data[0])
-# 	model.fit(data[0], data[1], epochs=10)
-# 	return model
+def train(data):
+	model = build_model(data[0])
+	model.fit(data[0], data[1], epochs=10)
+	return model
 
-# model = train((train_data, train_labels))
-# test_data = [np.array([[8, 1, 25, 38.87, -77.00]])]
-# res = model.predict(test_data)
+model = train((train_data, train_labels))
 
-# print(res)
 
-# print(('floor', top_categories[int(math.floor(res))]))
-# print(('ceil', top_categories[int(math.ceil(res))]))
+
+dt = datetime.datetime.now()
+input_hour = dt.hour
+input_month = dt.month
+input_spend = avgSpend
+
+res = model.predict(np.array([[input_hour, input_month, input_spend]]))
+print(('floor', top_categories[int(math.floor(res))]))
+print(('ceil', top_categories[int(math.ceil(res))]))
+
+recommendations = [top_categories[int(math.ceil(res))], top_categories[int(math.floor(res))]]
+
+
+
+
 
 

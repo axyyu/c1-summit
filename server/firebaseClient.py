@@ -47,7 +47,7 @@ class FirebaseClient():
 
   def __init__(self):
     try:
-      cred = credentials.Certificate("./firebase.json")
+      cred = credentials.Certificate('./firebase.json')
       firebase_admin.initialize_app(cred)
     except Exception as err:
       print(err)

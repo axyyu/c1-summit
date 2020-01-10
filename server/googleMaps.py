@@ -23,7 +23,7 @@ def search_cuisineAll(cost, cuisineList, midpt, radius):
 
     for cuisine in cuisineList:
 
-        url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={cuisine}&type=restaurant&location={lat},{lng}&radius={radius}&opennow&minprice={minprice}&maxprice={maxprice}&key={APIKEY}".format(
+        url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={cuisine}&type=restaurant&location={lat},{lng}&radius={radius}&minprice={minprice}&maxprice={maxprice}&key={APIKEY}".format(
             cuisine=cuisine, lat=lat, lng=lng, radius=radius, minprice=minprice, maxprice=maxprice, APIKEY=APIKEY)
 
         response = requests.get(url)
@@ -31,13 +31,13 @@ def search_cuisineAll(cost, cuisineList, midpt, radius):
 
         for result in res["results"]:
             placeList["places"].append({"name": result["name"],
-                "formatted_address": result["formatted_address"],
-                "latitude": result["geometry"]["location"]["lat"],
-                "longitude": result["geometry"]["location"]["lng"],
-                "price_level": result.get("price_level", 0),
-                "rating": result["rating"],
-                "user_ratings_total": result["user_ratings_total"],
-                "cuisine": cuisine})
+                                        "formatted_address": result["formatted_address"],
+                                        "latitude": result["geometry"]["location"]["lat"],
+                                        "longitude": result["geometry"]["location"]["lng"],
+                                        "price_level": result.get("price_level", 0),
+                                        "rating": result["rating"],
+                                        "user_ratings_total": result["user_ratings_total"],
+                                        "cuisine": cuisine})
 
     #return json.dumps(placeList)
     return placeList

@@ -41,7 +41,7 @@ def get_coords_from_trans(tot_trans):
     return coords
 
 def final_area(tot_trans):
-    coords = tot_trans
+    coords = get_coords_from_trans(tot_trans)
     hull = get_possible_location_v2(coords)
 
     #file = open("testfile2.txt","w") 

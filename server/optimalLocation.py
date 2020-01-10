@@ -6,6 +6,7 @@ from makePrediction import make_prediction
 from googleMaps import search_cuisineAll
 from felixfunctions import get_avg_spending_v2, final_area, point_inside_hull_v1
 from firebaseClient import FirebaseClient
+from neuralNet import machineLearning
 
 def get_cost(price):
   return price/10
@@ -18,14 +19,16 @@ def find_optimal_location(user_ids):
     if doc.id in user_ids:
       users.append(doc.to_dict())
 
-  top_categories = make_prediction(users)
-  price = get_avg_spending_v2(users)
-
-  tot_locs = []
+  trans = []
   for doc in fb.db.collection('users').stream():
     if doc.id in user_ids:
       for t in fb.db.collection('users').document(doc.id).collection('transactions').stream():
-        tot_locs.append(t.to_dict()["coordinates"])
+        trans.append(t.to_dict())
+
+  price = get_avg_spending_v2(users)
+
+  top_categories = make_prediction(users)
+  recommendations = machineLearning(users, trans, top_categories, price)
 
   _, center, radius, hull = final_area(tot_locs)
 
