@@ -63,41 +63,73 @@ const MapPage = ({
   }
 
   console.log(selectedRestaurant.name)
-  const onChange = field => {
+//   console.log(restaurants)
+// const showPlaces = (restaurants) => { 
+//     restaurants.map(restaurant => {
+//       return (
+//         <div onClick={() => setSelectedRestaurant(restaurant)}>
+//           <Places
+//             name={restaurant.name}
+//             rating={restaurant.rating}
+//             address={restaurant.formatted_address}
+//             price={restaurant.price_level}
+//             numReviews={restaurant.user_ratings_total}
+//             isSelected={
+//               restaurant.name == selectedRestaurant.name ? true : false
+//             }
+//             isRewards={
+//               restaurant.rating > 4.4 &&
+//               restaurant.user_ratings_total > 1050
+//             }
+//             rewardsPercent={Math.sqrt(restaurant.rating)}
+//             cuisine={restaurant.cuisine}
+//           />
+//         </div>
+//       )
+//     })
+// }
+
+const onChange = field => {
     console.log('calling change')
     let select = field
     console.log(select)
-    let myData = []
+    let data = []
     if (select === 'rating') {
-      //setRestaurants(
+      setRestaurants(
+          data=
         restaurants.sort((a, b) => {
           if (a.rating < b.rating) return 1
           else if (a.rating > b.rating) return -1
           return 0
         })
-      //)
+      )
       console.log(restaurants)
     } else if (select === 'distance') {
-      //setRestaurants(
+      setRestaurants(
+          data = 
         restaurants.sort((a, b) => {
           if (distance(a) > distance(b)) return 1
           else if (a.price_level < b.price_level) return -1
           return 0
         })
-      //)
+      )
       console.log(restaurants)
     } else if (select === 'price') {
-      //setRestaurants(
+      setRestaurants(
+          data=
         restaurants.sort((a, b) => {
           if (a.price_level > b.price_level) return 1
           else if (a.price_level < b.price_level) return -1
           return 0
         })
-     // )
+      )
       console.log(restaurants)
     }
-    setRestaurants(restaurants)
+    setRestaurants(data)
+    //showPlaces(restaurants)
+    data = []
   }
+
 
   return (
     <div style={{ backgroundColor: 'white' }}>
@@ -130,9 +162,10 @@ const MapPage = ({
               <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
                 Filter: <Filter />
               </div>
-              <div style={{display:'inline-block', marginLeft:'20px', verticalAlign:'bottom'}}></div><button onClick={() => setRestaurants(restaurants)}>Submit</button>
+              {/* <div style={{display:'inline-block', marginLeft:'20px', verticalAlign:'bottom'}}></div><button onClick={() => setRestaurants(restaurants)}>Submit</button> */}
             </div>
           </div>
+          {/* {showPlaces(restaurants)} */}
           <div
             style={{
               marginTop: '40px',
