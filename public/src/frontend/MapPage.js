@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { sin, cos, atan2, sqrt } from 'mathjs'
 import GoogleMap from './components/GoogleMap'
 import Places from './components/Places'
 import Direction from './components/Direction'
@@ -23,6 +24,7 @@ const sort = ['Rating', 'Distance', 'Category', 'Price']
 const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 //const [location, setLocation] = useState()
 
+
 const MapPage = ({
   coords,
   isGeolocationAvailable,
@@ -33,27 +35,11 @@ const MapPage = ({
     !isGeolocationAvailable || !isGeolocationEnabled || !coords
       ? { lat: 38.9188781, lng: -77.2221362 }
       : { lat: coords.latitude, lng: coords.longitude }
-  const restaurants = [
-    {
-      name: "McDonald's",
-      rating: '4.5/5',
-      address: '7937 Tysons Corner Center',
-      price: '$',
-      location: { latitude: 38.9175726, longitude: -77.2377628 },
-      numReviews: 500
-    },
-    {
-      name: 'Chick-Fil-A',
-      rating: '4/5',
-      address: '8461 Leesburg Pike Ste B',
-      price: '$',
-      location: { latitude: 47.444, longitude: -122.176 },
-      numReviews: 2345
-    }
-  ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
-  const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
   let results = require('./test.json')
+  console.log(results)
+  const [restaurants, setRestaurants] = useState(results.places)
+  const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
   const [list, setList] = useState(results) //all restaurants from initial search function
   console.log(list)
 
@@ -62,20 +48,56 @@ const MapPage = ({
 
   }
 
-  const sort = (selection) => {
-      if (selection === 'Rating') {
-        
-      } else if (selection === "Distance") {
-
-      } else {
-
-      }
-
-     for(var i = 0; i < list.length; i++){
-     }
+  const distance = (r) => {
+        let lon1 = currLocation.lng
+        let lat1 = currLocation.lat
+        let lon2 = r.longitude
+        let lat2 = r.latitude
+        let pi = 3.14159265358979323846264338327950
+        let R = 6378.137; //Radius of earth in KM 
+        let dLat = lat2 * pi / 180.0 - lat1 * pi / 180.0
+        let dLon = lon2 * pi / 180.0 - lon1 * pi / 180.0
+        let a = sin(dLat/2.0) * sin(dLat/2.0) + cos(lat1 * pi / 180.0) * cos(lat2 * pi / 180.0) * sin(dLon/2.0) * sin(dLon/2.0)
+        let c = 2.0 * atan2(sqrt(a), sqrt(1-a))
+        let d = R * c
+        return d * 1000.0 * 0.000621371; //miles
   }
 
   console.log(selectedRestaurant.name)
+    const onChange = field => {
+        console.log('calling change')
+        let select = field
+        console.log(select)
+        let myData = []
+        if (select === 'rating') {
+        setRestaurants(restaurants.sort((a, b) => {
+            if (a.rating < b.rating)
+                return 1;
+            else if (a.rating > b.rating)   
+                return -1;
+            return 0;
+        }))
+            console.log(restaurants)
+        } else if (select === 'distance') {
+            setRestaurants(restaurants.sort((a, b) => {
+                if (distance(a) > distance(b))
+                    return 1;
+                else if (a.price_level < b.price_level)
+                    return -1;
+                return 0;
+            }))
+                console.log(restaurants)
+        } else if (select === 'price') {
+            setRestaurants(restaurants.sort((a, b) => {
+                if (a.price_level > b.price_level)
+                    return 1;
+                else if (a.price_level < b.price_level)
+                    return -1;
+                return 0;
+            }))
+                console.log(restaurants)
+        }
+    }
 
   return (
     <div>
@@ -107,7 +129,7 @@ const MapPage = ({
             </a>
             <div style={{ display: 'inline-block' }}>
               <div style={{ display: 'inline-block' }}>
-                Sort: <Sort />
+                Sort: <Sort onChange={value => onChange(value)}/>
               </div>
               <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
                 Filter: <Filter />
@@ -126,9 +148,9 @@ const MapPage = ({
                 <Places
                   name={restaurant.name}
                   rating={restaurant.rating}
-                  address={restaurant.address}
-                  price={restaurant.price}
-                  numReviews={restaurant.numReviews}
+                  address={restaurant.formatted_address}
+                  price={restaurant.price_level}
+                  numReviews={restaurant.user_ratings_total}
                   isSelected={
                     restaurant.name == selectedRestaurant.name ? true : false
                   }

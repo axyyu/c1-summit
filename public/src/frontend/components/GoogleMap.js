@@ -31,8 +31,8 @@ class GoogleMap extends React.Component {
     return (
       <Marker
         position={{
-          lat: this.props.selectedRestaurant.location.latitude,
-          lng: this.props.selectedRestaurant.location.longitude
+          lat: this.props.selectedRestaurant.latitude,
+          lng: this.props.selectedRestaurant.longitude
         }}
         onClick={() => console.log('You clicked me!')}
         icon={{
@@ -64,8 +64,8 @@ class GoogleMap extends React.Component {
             key='restaurant'
             id='2'
             position={{
-              lat: this.props.selectedRestaurant.location.latitude,
-              lon: this.props.selectedRestaurant.location.longitude
+              lat: this.props.selectedRestaurant.latitude,
+              lon: this.props.selectedRestaurant.longitude
             }}
           />
           {this.displayFriends()}
