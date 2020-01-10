@@ -38,5 +38,5 @@ def get_user_by_id(id):
 @app.route('/api/location', methods=['POST'])
 def get_location():
   user_ids = request.json["user_ids"]
-  print(user_ids)
+  # print(user_ids)
   return jsonify(find_optimal_location(user_ids))
