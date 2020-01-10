@@ -8,7 +8,8 @@ const Places = ({
   numReviews,
   isSelected,
   isRewards,
-  rewardsPercent
+  rewardsPercent,
+  isEfficient
 }) => {
   const placesStyle = {
     padding: '0 10px',
@@ -43,6 +44,10 @@ const Places = ({
             'Earn ' +
               (Math.round(rewardsPercent * 100) / 100).toFixed(2) +
               '% higher rewards on your credit card for eating here.'}
+        </p>
+        <p style={{ clear: 'both', color: '#CAD3C8' }}>
+          {isEfficient &&
+            'This restaurant will best use your (and your party\'s) rewards points'}
         </p>
       </i>
     </div>
