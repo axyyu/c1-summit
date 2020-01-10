@@ -22,7 +22,7 @@ const FriendCard = ({
   <div style={friendCardStyle}>
     <p>{name}</p>
     <button
-      style={{ backgroundColor: '#58B19F', marginBottom: '15px' }}
+      style={{ backgroundColor: '#000000', marginBottom: '15px' }}
       onClick={() => {
         setMembers([...members, name])
         setMemberIDs([...memberIDs, id])
