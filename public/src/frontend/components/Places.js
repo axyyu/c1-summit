@@ -11,6 +11,7 @@ const Places = ({ name, rating, address, price, numReviews, isSelected }) => {
     marginBottom: '20px',
     backgroundColor: isSelected ? '#CAD3C8' : 'white'
   }
+  console.log(name)
   return (
     <div style={placesStyle}>
       <div>
