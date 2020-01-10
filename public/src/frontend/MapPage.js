@@ -29,7 +29,9 @@ const MapPage = ({
   coords,
   isGeolocationAvailable,
   isGeolocationEnabled,
-  positionError
+  positionError,
+  setShowMap,
+  resultPlaces
 }) => {
   const currLocation =
     !isGeolocationAvailable || !isGeolocationEnabled || !coords
@@ -100,7 +102,7 @@ const MapPage = ({
     }
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'white' }}>
       <div>
         <div
           style={{ marginLeft: '30px', marginTop: '30px' }}
@@ -112,21 +114,17 @@ const MapPage = ({
             style={{ marginBottom: '20px', display: 'inline-block' }}
           >
             {' '}
-            <a href='/'>
-              <button
-                style={{
-                  width: '100px',
-                  marginRight: '70px',
-                  marginBottom: '20px'
-                }}
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp; Back
-                <FontAwesomeIcon
-                  icon={faChevronLeft}
-                  style={{ float: 'left' }}
-                />
-              </button>
-            </a>
+            <button
+              onClick={() => setShowMap(false)}
+              style={{
+                width: '100px',
+                marginRight: '70px',
+                marginBottom: '20px'
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;&nbsp; Back
+              <FontAwesomeIcon icon={faChevronLeft} style={{ float: 'left' }} />
+            </button>
             <div style={{ display: 'inline-block' }}>
               <div style={{ display: 'inline-block' }}>
                 Sort: <Sort onChange={value => onChange(value)}/>
@@ -143,7 +141,7 @@ const MapPage = ({
               position: 'absolute'
             }}
           >
-            {restaurants.map(restaurant => (
+            {resultPlaces.map(restaurant => (
               <div onClick={() => setSelectedRestaurant(restaurant)}>
                 <Places
                   name={restaurant.name}
@@ -154,6 +152,7 @@ const MapPage = ({
                   isSelected={
                     restaurant.name == selectedRestaurant.name ? true : false
                   }
+                  cuisine={restaurant.cuisine}
                 />
               </div>
             ))}

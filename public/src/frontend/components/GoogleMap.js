@@ -59,7 +59,12 @@ class GoogleMap extends React.Component {
           style={mapStyle}
           initialCenter={initialCenter} //change default center to first suggested location
         >
-          <Marker key='tester' id='1' position={initialCenter} label='You Are Here'/>
+          <Marker
+            key='tester'
+            id='1'
+            position={initialCenter}
+            label='You Are Here'
+          />
           <Marker
             key='restaurant'
             id='2'
