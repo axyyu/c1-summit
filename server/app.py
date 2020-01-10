@@ -38,3 +38,8 @@ def get_user_by_id(id):
 @app.route('/api/location', methods=['POST'])
 def get_location():
   pass
+
+@app.route('/api/users/<id>', methods=['POST'])
+def get_user_by_id(id):
+  ref = fb.user_ref(id)
+  return jsonify(ref.get().to_dict())
