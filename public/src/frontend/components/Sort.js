@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Tree from 'react-dropdown-tree-select'
 import 'react-dropdown-tree-select/dist/styles.css'
+
 const Sort = () => {
+    const [selection, setSelection] = useState(null)
+
     const sort = [
-        {label: 'Rating'},
-        {label: 'Distance'},
-        {label: 'Price'}  
+        {label: 'Rating', value:'rating'},
+        {label: 'Distance', value:'distance'},
+        {label: 'Price', value:'price'}  
     ]
       
       const assignObjectPaths = (obj, stack) => {
@@ -19,7 +22,7 @@ const Sort = () => {
       };
 
     assignObjectPaths(sort);
-    
+
     return(
         <div style={{marginRight:'50px'}}>
             <Tree 

@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import GoogleMap from './components/GoogleMap'
-import Drop from './components/Drop'
 import Places from './components/Places'
 import Direction from './components/Direction'
-import Select from 'react-dropdown-select'
-import Tree from 'react-dropdown-tree-select'
 import 'react-dropdown-tree-select/dist/styles.css'
 import Sort from './components/Sort'
 import Filter from './components/Filter'
@@ -56,6 +53,27 @@ const MapPage = ({
   ]
   const friends = ['Emily', 'Rachel', 'Christina', 'Willie', 'Eddie', 'Felix']
   const [selectedRestaurant, setSelectedRestaurant] = useState(restaurants[0])
+  let results = require('./test.json')
+  const [list, setList] = useState(results) //all restaurants from initial search function
+  console.log(list)
+
+
+  const refine = () => {
+
+  }
+
+  const sort = (selection) => {
+      if (selection === 'Rating') {
+        
+      } else if (selection === "Distance") {
+
+      } else {
+
+      }
+
+     for(var i = 0; i < list.length; i++){
+     }
+  }
 
   console.log(selectedRestaurant.name)
 
