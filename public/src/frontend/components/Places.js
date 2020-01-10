@@ -1,6 +1,15 @@
 import React from 'react'
 
-const Places = ({ name, rating, address, price, numReviews, isSelected }) => {
+const Places = ({
+  name,
+  rating,
+  address,
+  price,
+  numReviews,
+  isSelected,
+  isRewards,
+  rewardsPercent
+}) => {
   const placesStyle = {
     padding: '0 10px',
     border: '1px solid #CAD3C8',
@@ -28,6 +37,14 @@ const Places = ({ name, rating, address, price, numReviews, isSelected }) => {
         </i>
         <p style={{ float: 'right' }}>{price}</p>
       </div>
+      <i>
+        <p style={{ clear: 'both', color: '#CAD3C8' }}>
+          {isRewards &&
+            'Earn ' +
+              (Math.round(rewardsPercent * 100) / 100).toFixed(2) +
+              '% higher rewards on your credit card for eating here.'}
+        </p>
+      </i>
     </div>
   )
 }
