@@ -81,11 +81,8 @@ const MapPage = () => {
               rating={restaurant.rating}
               address={restaurant.address}
               price={restaurant.price}
-<<<<<<< HEAD
               onClick={() => setRestaurant(restaurant)}
-=======
               numReviews={restaurant.numReviews}
->>>>>>> dfda615dac57df98b51686a659be729a67cf4a7e
             />
           ))}
         </div>
