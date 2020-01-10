@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
-from .generate_data import generate_data
-from .firebaseClient import FirebaseClient
+from generate_data import generate_data
+from firebaseClient import FirebaseClient
 
 
 app = Flask(__name__)
