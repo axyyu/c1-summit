@@ -9,7 +9,15 @@ const tagStyle = {
 }
 
 const SearchPage = () => {
-  const testList = ['Friend One', 'Friend Two', 'Friend Three', 'Friend Four']
+  const testList = [
+    'Emily Lu',
+    'Christina Lu',
+    'Rachel Lu',
+    'Eddie Tu',
+    'Willie Xia',
+    'Andrew Wang',
+    'Felix Hu'
+  ]
   const [members, setMembers] = useState([])
   const Tag = ({ text }) => (
     <div style={tagStyle}>
@@ -42,16 +50,23 @@ const SearchPage = () => {
         {members.map(name => (
           <Tag text={name} />
         ))}
-        <Search placeholder='Add group members...' resultsList={testList} />
+        <Search
+          placeholder='Add group members...'
+          resultsList={testList}
+          members={members}
+          setMembers={setMembers}
+        />
         <h4>Suggested Friends</h4>
         <div>
-          {testList.map(friend => (
-            <FriendCard
-              name={friend}
-              members={members}
-              setMembers={setMembers}
-            />
-          ))}
+          {testList
+            .filter(name => !members.includes(name))
+            .map(friend => (
+              <FriendCard
+                name={friend}
+                members={members}
+                setMembers={setMembers}
+              />
+            ))}
         </div>
       </div>
     </div>
