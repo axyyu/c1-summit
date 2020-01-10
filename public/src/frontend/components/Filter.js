@@ -3,25 +3,25 @@ import Tree from 'react-dropdown-tree-select'
 import 'react-dropdown-tree-select/dist/styles.css'
 const Filter = () => {
     const rating = [
-        {label: '> 1 Star'},
-        {label: '> 2 Star'},
-        {label: '> 3 Star'},
-        {label: '> 4 Star'},         
+        {label: '> 1 Star', value:'1'},
+        {label: '> 2 Star', value:'2'},
+        {label: '> 3 Star', value:'3'},
+        {label: '> 4 Star', value:'4'},         
     ]
 
     const dist = [
-        {label: '< 5 miles'},
-        {label: '< 10 miles'},
-        {label: '< 15 miles'},
-        {label: '< 20 miles'},
-        {label: '50+ miles'},
+        {label: '< 5 miles', value:'5'},
+        {label: '< 10 miles', value:'10'},
+        {label: '< 15 miles', value:'15'},
+        {label: '< 20 miles', value:'20'},
+        {label: '50+ miles', value:'50'},
     ]
     
     const price = [
-        {label: '< $'},
-        {label: '< $$'},
-        {label: '< $$$'},
-        {label: '< $$$$'},
+        {label: '< $', value:'one'},
+        {label: '< $$', value:'two'},
+        {label: '< $$$',value:'three'},
+        {label: '< $$$$', value:'four'},
     ]
 
       const assignObjectPaths = (obj, stack) => {
