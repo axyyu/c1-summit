@@ -141,7 +141,7 @@ const MapPage = ({
               position: 'absolute'
             }}
           >
-            {resultPlaces.map(restaurant => (
+            {restaurants.map(restaurant => (
               <div onClick={() => setSelectedRestaurant(restaurant)}>
                 <Places
                   name={restaurant.name}
