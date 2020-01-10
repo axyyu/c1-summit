@@ -4,6 +4,7 @@ import Drop from './components/Drop'
 import Places from './components/Places'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { geolocated } from 'react-geolocated'
 
 const drop = {
   display: 'inline-block',
@@ -20,7 +21,16 @@ const sort = ['Rating', 'Distance', 'Category', 'Price']
 const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 //const [location, setLocation] = useState()
 
-const MapPage = () => {
+const MapPage = ({
+  coords,
+  isGeolocationAvailable,
+  isGeolocationEnabled,
+  positionError
+}) => {
+  const currLocation =
+    !isGeolocationAvailable || !isGeolocationEnabled || !coords
+      ? { lat: 47.444, lng: -122.176 }
+      : { lat: coords.latitude, lng: coords.longitude }
   const restaurants = [
     {
       name: "McDonald's",
@@ -87,6 +97,7 @@ const MapPage = () => {
             style={{ margin: 'auto' }}
             friends={friends}
             restaurants={restaurants}
+            currLocation={currLocation}
           />
         </div>
       </div>
@@ -94,4 +105,9 @@ const MapPage = () => {
   )
 }
 
-export default MapPage
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(MapPage)

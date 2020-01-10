@@ -39,19 +39,12 @@ const SearchPage = () => {
       </a>
       <div style={{ width: '80%' }}>
         <h1 style={{ color: '#6D214F' }}>Find food with friends</h1>
-        <h4>What are you feeling?</h4>
-        <Search
-          placeholder='Add options...'
-          resultsList={testList}
-          members={members}
-          setMembers={setMembers}
-        />
         <h4>Who are you going with?</h4>
         {members.map(name => (
           <Tag text={name} />
         ))}
         <Search
-          placeholder='Add group members...'
+          placeholder='Search group members...'
           resultsList={testList}
           members={members}
           setMembers={setMembers}

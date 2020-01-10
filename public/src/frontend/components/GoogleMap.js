@@ -46,7 +46,7 @@ class GoogleMap extends React.Component {
     }
 
     //const [location, setLocation] = useState(this.state.restaurants[0].location);
-    const initialCenter = { lat: 47.444, lng: -122.176 }
+    const initialCenter = this.props.currLocation
 
     return (
       <div style={{ textAlign: 'right' }}>
