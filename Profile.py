@@ -6,3 +6,5 @@ class Profile:
         averageSpending = 0
         medianSpending = 0
         categoryScores = []
+        xLocation = 0
+        yLocation = 0
