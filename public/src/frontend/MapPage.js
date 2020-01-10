@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { sin, cos, atan2, sqrt } from 'mathjs'
 import GoogleMap from './components/GoogleMap'
 import Places from './components/Places'
@@ -69,33 +69,34 @@ const MapPage = ({
     console.log(select)
     let myData = []
     if (select === 'rating') {
-      setRestaurants(
+      //setRestaurants(
         restaurants.sort((a, b) => {
           if (a.rating < b.rating) return 1
           else if (a.rating > b.rating) return -1
           return 0
         })
-      )
+      //)
       console.log(restaurants)
     } else if (select === 'distance') {
-      setRestaurants(
+      //setRestaurants(
         restaurants.sort((a, b) => {
           if (distance(a) > distance(b)) return 1
           else if (a.price_level < b.price_level) return -1
           return 0
         })
-      )
+      //)
       console.log(restaurants)
     } else if (select === 'price') {
-      setRestaurants(
+      //setRestaurants(
         restaurants.sort((a, b) => {
           if (a.price_level > b.price_level) return 1
           else if (a.price_level < b.price_level) return -1
           return 0
         })
-      )
+     // )
       console.log(restaurants)
     }
+    setRestaurants(restaurants)
   }
 
   return (
@@ -124,12 +125,12 @@ const MapPage = ({
             </button>
             <div style={{ display: 'inline-block' }}>
               <div style={{ display: 'inline-block' }}>
-                Sort: <Sort onChange={value => onChange(value)} />
+                Sort: <Sort onChange={value => {onChange(value); setRestaurants(restaurants)}} />
               </div>
               <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
                 Filter: <Filter />
               </div>
-              {/* <div style={{display:'inline-block', marginLeft:'20px', verticalAlign:'bottom'}}></div><button onClick={() => this.forceUpdate()}>Submit</button> */}
+              <div style={{display:'inline-block', marginLeft:'20px', verticalAlign:'bottom'}}></div><button onClick={() => setRestaurants(restaurants)}>Submit</button>
             </div>
           </div>
           <div
