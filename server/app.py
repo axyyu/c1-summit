@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from generate_data import generate_data
 from firebaseClient import FirebaseClient
 
-
 app = Flask(__name__)
 fb = FirebaseClient()
 
@@ -10,7 +9,6 @@ fb = FirebaseClient()
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
-
 
 @app.route('/data')
 def data():
@@ -28,7 +26,7 @@ def fav():
 def get_users():
   users = {}
   for user in fb.db.collection('users').get():
-    users[user.id] = {user.to_dict()}
+    users[user.id] = user.to_dict()
 
   return jsonify(users)
 

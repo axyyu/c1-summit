@@ -3,6 +3,9 @@ import GoogleMap from './components/GoogleMap'
 import Drop from './components/Drop'
 import Places from './components/Places'
 import Direction from './components/Direction'
+import Select from 'react-dropdown-select'
+import Tree from 'react-dropdown-tree-select'
+import Sort from './components/Sort'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { geolocated } from 'react-geolocated'
@@ -86,6 +89,7 @@ const MapPage = ({
                 position: 'absolute'
               }}
             >
+              <Sort />
               <Drop style={{ float: 'top' }} title='Filter' list={filter} />
             </div>
           </div>
