@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import GoogleMap from './components/GoogleMap'
 import Drop from './components/Drop'
 import Places from './components/Places'
@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const drop = {
-    textAlign: 'center',
-    display: 'inline-block',
-    marginLeft: '100px',
-    marginTop: '30px'
+  textAlign: 'center',
+  display: 'inline-block',
+  marginLeft: '100px',
+  marginTop: '30px'
 }
 
-const sort = ['Rating','Distance', 'Category', 'Price']
+const sort = ['Rating', 'Distance', 'Category', 'Price']
 const filter = ['Rating', 'Distance', 'Category', 'Price', 'Availability']
 //const [location, setLocation] = useState()
 
@@ -37,7 +37,8 @@ const MapPage = () => {
             <GoogleMap style={{margin:'auto'}} friends={friends} restaurants={restaurants}/>
         </div>
       </div>
-    );
+    </div>
+  )
 }
 
 export default MapPage

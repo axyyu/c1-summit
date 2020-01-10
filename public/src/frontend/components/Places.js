@@ -13,7 +13,9 @@ const Places = ({name, rating, price, address}) => {
                 </div>
             </button>
         </div>
-    );
+      </button>
+    </div>
+  )
 }
 
 export default Places
