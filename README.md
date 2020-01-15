@@ -27,3 +27,15 @@ Our process is easy
 - Binary search :)
 - Sigmoidal functions
 - Ray casting
+
+## How to use:
+  1. Fork files
+  2. Install all requirements
+  3. Run flask in c1-summit folder in command prompt
+  ```
+  flask run
+  ```
+  4. Run Node.js in the public folder
+  ```
+  npm start
+  ```
