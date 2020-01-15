@@ -1,5 +1,5 @@
-#BULLSEYE
-##Targeting the tasty medium for everyone
+BULLSEYE
+Targeting the tasty medium for everyone
 –––––––––––––––––––––––––––—————---
 One friend group -> Where should we eat?
 -Many food preferences, financial situations, and locations
