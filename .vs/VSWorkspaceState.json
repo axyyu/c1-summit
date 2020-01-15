@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\public\\public",
+    "\\public\\src",
+    "\\public\\src\\frontend",
+    "\\server"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\server\\app.py",
   "PreviewInSolutionExplorer": false
 }
