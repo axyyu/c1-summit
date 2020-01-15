@@ -11,14 +11,14 @@ Our process is easy
  4. Enjoy and get rewarded
 
 ## Factors Analyzed:
--Cuisine & Price
--TensorFlow analyzes transaction history to discover shared preferences at an affordable price.
--Google Maps API finds matching places
+- Cuisine & Price
+- TensorFlow analyzes transaction history to discover shared preferences at an affordable price.
+- Google Maps API finds matching places
 
 ## How does it work?
--Location -> Centroid calculations on current and past user locations
--Rewards (Credit Card Bonuses)
--Matches users with sponsored spots for bonus points
+- Location -> Centroid calculations on current and past user locations
+- Rewards (Credit Card Bonuses)
+- Matches users with sponsored spots for bonus points
 
 ## Math & Algorithms Used
 - Haversine’s Law
